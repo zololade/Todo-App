@@ -1,15 +1,8 @@
 import Page, { type PageData } from "../view/Page";
-import { HomeData } from "../model/home";
-import { FooterData } from "../model/footer";
-import aboutPageData from "../model/about";
-import { menuData } from "../model/menu";
-import contactPageData from "../model/contact";
+import { todoPageData } from "../model/todoPage";
 
 export const viewMap = {
- home: HomeData,
- about: aboutPageData,
- menu: menuData,
- contact: contactPageData,
+ home: todoPageData,
 } as const;
 
 const mainContainer = document.getElementById("main");
@@ -35,7 +28,6 @@ export function renderView(view: keyof typeof viewMap) {
 function initialLoad() {
  if (!mainContainer || !footerContainer) return;
  renderView("home");
- contentDisplayer(footerContainer, FooterData);
 }
 
 initialLoad();

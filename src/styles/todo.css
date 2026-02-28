@@ -1,0 +1,272 @@
+/* ============================================
+   RESET & BASE
+   ============================================ */
+
+*,
+*::before,
+*::after {
+ box-sizing: border-box;
+ margin: 0;
+ padding: 0;
+}
+
+:root {
+ --clr-bg: #ffffff;
+ --clr-surface: #f7f7f7;
+ --clr-border: #e8e8e8;
+ --clr-text: #111111;
+ --clr-text-muted: #999999;
+ --clr-accent: #111111;
+
+ --font-sans: "DM Sans", sans-serif;
+
+ --header-height: 60px;
+ --radius: 8px;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap");
+
+html,
+body {
+ height: 100%;
+ margin: auto;
+}
+
+body {
+ font-family: var(--font-sans);
+ background-color: var(--clr-bg);
+ color: var(--clr-text);
+ font-size: 16px;
+ line-height: 1.6;
+ -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================
+   HEADER & NAV
+   ============================================ */
+
+#header {
+ position: fixed;
+ bottom: 0;
+ z-index: 100;
+ width: 100%;
+ height: var(--header-height);
+ background-color: var(--clr-bg);
+ border-top: 1px solid var(--clr-border);
+ display: flex;
+ align-items: center;
+ /*justify-content: center;*/
+ padding: 0 2.5rem;
+}
+
+nav {
+ display: flex;
+ align-items: center;
+ gap: 0.25rem;
+}
+
+nav button {
+ background: none;
+ border: none;
+ cursor: pointer;
+ font-family: var(--font-sans);
+ font-size: 0.875rem;
+ font-weight: 500;
+ color: var(--clr-text-muted);
+ padding: 0.4rem 0.75rem;
+ position: relative;
+ transition: color 0.2s ease;
+ letter-spacing: 0.01em;
+}
+
+nav button::after {
+ content: "";
+ position: absolute;
+ bottom: -1px; /* sits on the header border */
+ left: 0.75rem;
+ right: 0.75rem;
+ height: 2px;
+ background-color: var(--clr-accent);
+ transform: scaleX(0);
+ transition: transform 0.2s ease;
+}
+
+nav button:hover {
+ color: var(--clr-text);
+}
+
+nav button.active {
+ color: var(--clr-text);
+}
+
+nav button.active::after {
+ transform: scaleX(1);
+}
+
+/* ============================================
+   MAIN CONTENT AREA
+   ============================================ */
+
+#main {
+ min-height: calc(100vh - var(--header-height));
+}
+
+/* ============================================
+   TODO PAGE LAYOUT
+   Two columns: detail (left) + list (right)
+   Only applies when todo page is rendered
+   ============================================ */
+
+#main:has(#activity-detail) {
+ display: grid;
+ grid-template-columns: 400px 1fr;
+ height: calc(100vh - var(--header-height));
+ overflow: hidden;
+}
+
+/* --- Detail Panel (left) --- */
+
+#activity-detail {
+ padding: 3rem 2.5rem;
+ overflow-y: auto;
+ background-color: var(--clr-bg);
+}
+
+#activity-detail h2 {
+ font-size: 1.6rem;
+ font-weight: 600;
+ letter-spacing: -0.03em;
+ color: var(--clr-text);
+ margin-bottom: 0.75rem;
+}
+
+#activity-detail p {
+ font-size: 0.95rem;
+ color: var(--clr-text-muted);
+ line-height: 1.75;
+ max-width: 44ch;
+}
+/* --- list panel (right) --- */
+
+#activity-list {
+ padding: 3rem 2.5rem;
+ overflow-y: auto;
+ background-color: var(--clr-surface);
+ border-left: 1px solid var(--clr-border);
+}
+
+#activity-list h2 {
+ font-size: 0.68rem;
+ font-weight: 600;
+ letter-spacing: 0.12em;
+ text-transform: uppercase;
+ color: var(--clr-text-muted);
+ margin-bottom: 1.5rem;
+}
+
+#activity-list ul {
+ list-style: none;
+ display: flex;
+ flex-direction: column;
+ gap: 0.25rem;
+}
+
+#activity-list li {
+ padding: 0.85rem 1rem;
+ border-radius: var(--radius);
+ cursor: pointer;
+ transition: background 0.15s ease;
+ display: flex;
+ flex-direction: column;
+ gap: 0.2rem;
+}
+
+#activity-list li:hover {
+ background-color: #efefef;
+}
+
+#activity-list li.active {
+ background-color: var(--clr-text);
+}
+
+#activity-list li strong {
+ font-size: 0.9rem;
+ font-weight: 600;
+ color: var(--clr-text);
+ transition: color 0.15s ease;
+}
+
+#activity-list li span {
+ font-size: 0.78rem;
+ color: var(--clr-text-muted);
+ transition: color 0.15s ease;
+}
+
+#activity-list li.active strong,
+#activity-list li.active span {
+ color: #ffffff;
+}
+
+/* ============================================
+   general page content (home, about, etc.)
+   ============================================ */
+
+header,
+section {
+ padding: 3rem 2.5rem;
+ /*max-width: 680px;*/
+}
+h1 {
+ font-size: 2rem;
+ font-weight: 600;
+ letter-spacing: -0.04em;
+ margin-bottom: 0.75rem;
+}
+
+h2 {
+ font-size: 1.25rem;
+ font-weight: 600;
+ letter-spacing: -0.02em;
+ margin-bottom: 0.5rem;
+}
+
+p {
+ font-size: 0.95rem;
+ color: var(--clr-text-muted);
+ line-height: 1.75;
+ margin-bottom: 1rem;
+}
+
+strong {
+ color: var(--clr-text);
+ font-weight: 600;
+}
+/* ============================================
+   responsive
+   ============================================ */
+
+@media (max-width: 980px) {
+ #header {
+  padding: 0 1.25rem;
+ }
+
+ #main:has(#activity-detail) {
+  grid-template-columns: 1fr;
+  height: auto;
+  overflow: visible;
+ }
+
+ #activity-list {
+  border-left: none;
+  border-top: 1px solid var(--clr-border);
+ }
+
+ header,
+ section {
+  padding: 2rem 1.25rem;
+ }
+
+ #footer {
+  padding: 1.25rem;
+ }
+}
