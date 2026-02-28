@@ -1,5 +1,6 @@
+import { activities } from "../model/todo";
 import Page, { type PageData } from "../view/Page";
-import { todoPageData } from "../model/todoPage";
+import { buildActivityDetail, todoPageData } from "../model/todoPage";
 
 export const viewMap = {
  home: todoPageData,
@@ -29,5 +30,30 @@ function initialLoad() {
  if (!mainContainer || !footerContainer) return;
  renderView("home");
 }
+// Event Delegation for Activity Selection
+mainContainer?.addEventListener("click", (e) => {
+ const target = e.target as HTMLElement;
+ const listItem = target.closest("li[data-id]");
+
+ if (listItem) {
+  const activityId = Number(listItem.getAttribute("data-id"));
+  const activity = activities.find((a) => a.id === activityId);
+
+  if (activity) {
+   // 1. Update Active State in UI
+   mainContainer
+    .querySelectorAll("#activity-list li")
+    .forEach((el) => el.classList.remove("active"));
+   listItem.classList.add("active");
+
+   // 2. Render Detail Panel
+   const detailPanel = document.getElementById("activity-detail");
+   if (detailPanel) {
+    const detailData = buildActivityDetail(activity);
+    contentDisplayer(detailPanel, detailData);
+   }
+  }
+ }
+});
 
 initialLoad();
