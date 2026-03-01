@@ -1,9 +1,10 @@
 import { renderView, viewMap } from "./renderUtility";
 
-const buttons = document.querySelectorAll<HTMLButtonElement>("nav button");
+const headerButtons =
+ document.querySelectorAll<HTMLButtonElement>("#header nav button");
 
 function updateClickedButton(clickedBtn: HTMLButtonElement): void {
- buttons.forEach((btn) => btn.classList.remove("active"));
+ headerButtons.forEach((btn) => btn.classList.remove("active"));
  clickedBtn.classList.add("active");
 }
 
@@ -11,7 +12,7 @@ function isValidView(value: string | undefined): value is keyof typeof viewMap {
  return value !== undefined && value in viewMap;
 }
 
-buttons.forEach((button) => {
+headerButtons.forEach((button) => {
  button.addEventListener("click", (e) => {
   let eventOwner = e.target as HTMLButtonElement;
   updateClickedButton(eventOwner);

@@ -4,6 +4,7 @@ import type { PageData } from "../view/Page";
 // The welcome message shown in Section 1 before anything is selected
 export const welcomeDetail: PageData = {
  tag: "div",
+ id: "activityInfo",
  content: [
   { tag: "h2", content: "Welcome to your Todo App" },
   {
@@ -15,17 +16,14 @@ export const welcomeDetail: PageData = {
 
 // Builds the full detail view for a single activity (Section 1)
 export function buildActivityDetail(activity: Activity): PageData {
- return {
-  tag: "div",
-  content: [
-   { tag: "h2", content: activity.title },
-   { tag: "p", content: activity.description },
-   { tag: "p", content: `Due: ${activity.dueDate}` },
-   { tag: "p", content: `Priority: ${activity.priority}` },
-   { tag: "p", content: `Status: ${activity.status}` },
-   { tag: "p", content: `Tags: ${activity.tags.join(", ")}` },
-  ],
- };
+ return [
+  { tag: "h2", content: activity.title },
+  { tag: "p", content: activity.description },
+  { tag: "p", content: `Due: ${activity.dueDate}` },
+  { tag: "p", content: `Priority: ${activity.priority}` },
+  { tag: "p", content: `Status: ${activity.status}` },
+  { tag: "p", content: `Tags: ${activity.tags.join(", ")}` },
+ ];
 }
 
 // Builds a single list item (overview) for Section 2
@@ -44,7 +42,14 @@ function buildActivityItem(activity: Activity): PageData {
 export const activityDetail: PageData = {
  tag: "section",
  id: "activity-detail",
- content: [welcomeDetail], // Section 1 starts with welcome message
+ content: [
+  {
+   tag: "nav",
+   class: "activity-nav",
+   content: [{ tag: "div", content: "hello" }],
+  },
+  welcomeDetail,
+ ], // Section 1 starts with welcome message
 };
 
 export const activitiesSection: PageData = {

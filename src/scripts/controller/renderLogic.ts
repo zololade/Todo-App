@@ -31,7 +31,7 @@ mainContainer?.addEventListener("click", (e) => {
     mainContainer.classList.toggle("show-detail");
    }
    // 2. Render Detail Panel
-   const detailPanel = document.getElementById("activity-detail");
+   const detailPanel = document.getElementById("activityInfo");
    if (detailPanel) {
     const detailData = buildActivityDetail(activity);
     renderElement(detailPanel, detailData);
