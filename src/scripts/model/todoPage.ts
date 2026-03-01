@@ -41,21 +41,26 @@ function buildActivityItem(activity: Activity): PageData {
 }
 
 // The full todo page data: both sections together
-export const todoPageData: PageData = [
- {
-  tag: "section",
-  id: "activity-list",
-  content: [
-   { tag: "h2", content: "Your Activities" },
-   {
-    tag: "ul",
-    content: activities.map(buildActivityItem),
-   },
-  ],
- },
- {
-  tag: "section",
-  id: "activity-detail",
-  content: [welcomeDetail], // Section 1 starts with welcome message
- },
-];
+export const activityDetail: PageData = {
+ tag: "section",
+ id: "activity-detail",
+ content: [welcomeDetail], // Section 1 starts with welcome message
+};
+
+export const activitiesSection: PageData = {
+ tag: "section",
+ id: "activity-list",
+ content: [
+  { tag: "h2", content: "Your Activities" },
+  {
+   tag: "ul",
+   content: activities.map(buildActivityItem),
+  },
+ ],
+};
+
+export const HomeData = (layout: "mobile" | "desktop") => {
+ return layout === "mobile"
+  ? activitiesSection
+  : [activitiesSection, activityDetail];
+};
