@@ -9,6 +9,7 @@ import { mainContainer, renderElement, renderView } from "./renderUtility";
 window.addEventListener("load", () => {
  if (!mainContainer) return;
  renderView("home");
+ console.log(document.querySelector("#backBtn"));
 });
 
 // Event Delegation for Activity Selection
@@ -29,6 +30,7 @@ mainContainer?.addEventListener("click", (e) => {
    listItem.classList.add("active");
    if (window.innerWidth < 1100) {
     mainContainer.classList.toggle("show-detail");
+    document.querySelector("#backBtn")?.removeAttribute("disabled");
    }
    // 2. Render Detail Panel
    const detailPanel = document.getElementById("activityInfo");

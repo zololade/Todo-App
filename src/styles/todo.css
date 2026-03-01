@@ -82,10 +82,20 @@
 
 *,
 *::before,
-*::after {
+*::after,
+button {
  box-sizing: border-box;
  margin: 0;
  padding: 0;
+}
+button {
+ all: unset;
+}
+
+button:focus,
+button:hover {
+ border: none;
+ outline: revert; /* Reverts outline to browser default when focused */
 }
 
 body {
@@ -129,11 +139,11 @@ body {
  gap: 1.5rem;
 }
 
-nav button {
+#header nav button {
  width: 44px;
  height: 44px;
  border-radius: var(--radius-md);
- border: none;
+ border: 1px solid transparent;
  background: transparent;
  cursor: pointer;
  color: var(--text-secondary);
@@ -142,9 +152,10 @@ nav button {
  align-items: center;
  justify-content: center;
  font-weight: 600;
+ padding: 0.35rem;
 }
 
-nav button.active {
+#header nav button.active {
  background: var(--accent-soft);
  color: var(--accent);
 }
@@ -170,6 +181,7 @@ nav button.active {
  scrollbar-width: thin;
  scrollbar-gutter: 0.5rem;
  scrollbar-color: var(--thumb) var(--bg-sidebar);
+ animation: slideUp 0.5s ease-out;
 }
 
 #activity-list h2 {
@@ -308,6 +320,33 @@ nav button.active {
  border-top: 1px solid var(--border);
  display: flex;
  justify-content: flex-start;
+ align-items: center;
  padding: 2rem;
  z-index: 100;
+}
+
+.activity-nav button {
+ /*width: 44px;
+ height: 44px;*/
+ padding: 0.5rem 1rem;
+ border-radius: var(--radius-md);
+ border: 1px solid transparent;
+ background: var(--bg-card);
+ cursor: pointer;
+ color: var(--text-primary);
+ transition: all 0.2s;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ font-weight: 600;
+}
+.activity-nav button:hover {
+ border: 1px solid var(--border);
+}
+
+.activity-nav button:disabled {
+ color: var(--text-secondary);
+}
+.activity-nav button:hover:disabled {
+ border: 1px solid transparent;
 }

@@ -46,7 +46,9 @@ export const activityDetail: PageData = {
   {
    tag: "nav",
    class: "activity-nav",
-   content: [{ tag: "div", content: "hello" }],
+   content: [
+    { tag: "button", content: "Back", id: "backBtn", disabled: "disabled" },
+   ],
   },
   welcomeDetail,
  ], // Section 1 starts with welcome message

@@ -1,4 +1,4 @@
-import { renderView, viewMap } from "./renderUtility";
+import { mainContainer, renderView, viewMap } from "./renderUtility";
 
 const headerButtons =
  document.querySelectorAll<HTMLButtonElement>("#header nav button");
@@ -23,4 +23,13 @@ headerButtons.forEach((button) => {
    renderView(view);
   }
  });
+});
+
+document.addEventListener("click", (e) => {
+ const target = e.target as HTMLElement;
+ const btn = target.closest("#backBtn");
+ if (btn) {
+  mainContainer?.classList.remove("show-detail");
+  btn.setAttribute("disabled", "disabled");
+ }
 });
