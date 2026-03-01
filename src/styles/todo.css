@@ -24,6 +24,10 @@
  --radius-lg: 18px;
  --radius-md: 12px;
  --thumb: #372f41;
+ --para: clamp(0.5rem, 0.5rem + 1vw, 1rem);
+ --activities-span: clamp(0.4rem, 0.5rem + 1vw, 0.8rem);
+ --activities-span-h2: clamp(0.4rem, 0.6rem + 1vw, 0.95rem);
+ --h2: clamp(1rem, 1vw + 1rem, 2rem);
 }
 
 /* ===== DARK ===== */
@@ -123,7 +127,7 @@ body {
  position: fixed;
  left: 0;
  top: 0;
- width: 80px; /* Slim Icon Bar */
+ width: 60px; /* Slim Icon Bar */
  height: 100vh;
  background: var(--bg-card);
  border-right: 1px solid var(--border);
@@ -140,8 +144,8 @@ body {
 }
 
 #header nav button {
- width: 44px;
- height: 44px;
+ width: 30px;
+ height: 30px;
  border-radius: var(--radius-md);
  border: 1px solid transparent;
  background: transparent;
@@ -152,7 +156,8 @@ body {
  align-items: center;
  justify-content: center;
  font-weight: 600;
- padding: 0.35rem;
+ padding: 0.25rem;
+ font-size: 0.7rem;
 }
 
 #header nav button.active {
@@ -165,7 +170,7 @@ body {
    ============================================ */
 #main {
  flex: 1;
- margin-left: 80px; /* Offset for slim nav */
+ margin-left: 60px; /* Offset for slim nav */
  display: grid !important; /* Force override */
  grid-template-columns: 380px 1fr;
  height: 100vh;
@@ -185,7 +190,7 @@ body {
 }
 
 #activity-list h2 {
- font-size: 0.75rem;
+ font-size: var(--activities-span-h2);
  text-transform: uppercase;
  letter-spacing: 0.1em;
  color: var(--text-secondary);
@@ -219,14 +224,14 @@ body {
 }
 #activity-list li strong {
  display: block;
- font-size: 0.95rem;
+ font-size: var(--activities-span-h2);
  font-weight: 600;
  color: var(--text-primary);
  margin-bottom: 4px;
 }
 
 #activity-list li span {
- font-size: 0.8rem;
+ font-size: var(--activities-span);
  color: var(--text-secondary);
 }
 
@@ -261,7 +266,7 @@ body {
 }
 
 #activity-detail h2 {
- font-size: 2.5rem;
+ font-size: var(--h2);
  font-weight: 800;
  letter-spacing: -0.04em;
  margin-bottom: 1.5rem;
@@ -269,7 +274,7 @@ body {
 }
 
 #activity-detail p {
- font-size: 1.1rem;
+ font-size: var(--para);
  line-height: 1.6;
  color: #424245;
  margin-bottom: 1.2rem;
@@ -283,7 +288,7 @@ body {
  color: var(--accent);
  padding: 6px 14px;
  border-radius: 999px;
- font-size: 0.85rem;
+ font-size: var(--para);
  font-weight: 500;
 }
 
@@ -315,7 +320,7 @@ body {
  position: absolute;
  bottom: 0;
  width: 100%;
- height: 80px;
+ height: 60px;
  background: var(--bg-app);
  border-top: 1px solid var(--border);
  display: flex;
@@ -339,6 +344,7 @@ body {
  align-items: center;
  justify-content: center;
  font-weight: 600;
+ font-size: 0.8rem;
 }
 .activity-nav button:hover {
  border: 1px solid var(--border);
