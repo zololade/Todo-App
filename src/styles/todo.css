@@ -331,8 +331,6 @@ body {
 }
 
 .activity-nav button {
- /*width: 44px;
- height: 44px;*/
  padding: 0.5rem 1rem;
  border-radius: var(--radius-md);
  border: 1px solid transparent;
