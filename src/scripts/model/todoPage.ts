@@ -59,8 +59,4 @@ export const activitiesSection: PageData = {
  ],
 };
 
-export const HomeData = (layout: "mobile" | "desktop") => {
- return layout === "mobile"
-  ? activitiesSection
-  : [activitiesSection, activityDetail];
-};
+export const HomeData = [activitiesSection, activityDetail];

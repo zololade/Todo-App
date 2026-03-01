@@ -1,16 +1,41 @@
 // import { type PageData } from "../view/Page";
-import { mediaQuery, renderView } from "./renderUtility";
+import { activities } from "../model/todo";
+import { buildActivityDetail } from "../model/todoPage";
+import { mainContainer, renderElement, renderView } from "./renderUtility";
 
-const mainContainer = document.getElementById("main");
+// type Activity = "activities" | "activity";
+// let selectedActivity: Activity | null = null;
 
 window.addEventListener("load", () => {
  if (!mainContainer) return;
- renderView(mainContainer, "home");
+ renderView("home");
 });
 
-const handleScreenChange = () => {
+// Event Delegation for Activity Selection
+mainContainer?.addEventListener("click", (e) => {
  if (!mainContainer) return;
- renderView(mainContainer, "home");
-};
+ const target = e.target as HTMLElement;
+ const listItem = target.closest("li[data-id]");
 
-mediaQuery.addEventListener("change", handleScreenChange);
+ if (listItem) {
+  const activityId = Number(listItem.getAttribute("data-id"));
+  const activity = activities.find((a) => a.id === activityId);
+
+  if (activity) {
+   // 1. Update Active State in UI
+   mainContainer
+    .querySelectorAll("#activity-list li")
+    .forEach((el) => el.classList.remove("active"));
+   listItem.classList.add("active");
+   if (window.innerWidth < 1100) {
+    mainContainer.classList.toggle("show-detail");
+   }
+   // 2. Render Detail Panel
+   const detailPanel = document.getElementById("activity-detail");
+   if (detailPanel) {
+    const detailData = buildActivityDetail(activity);
+    renderElement(detailPanel, detailData);
+   }
+  }
+ }
+});
