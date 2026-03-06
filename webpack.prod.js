@@ -5,6 +5,6 @@ import path from "node:path";
 const __dirname = import.meta.dirname;
 
 export default merge(common, {
- mode: "production",
- devtool: "source-map",
+  mode: "production",
+  devtool: "source-map",
 });

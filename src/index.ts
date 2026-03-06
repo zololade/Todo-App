@@ -4,5 +4,5 @@ import "./scripts/controller/buttonController";
 import "./scripts/controller/renderLogic";
 
 window.addEventListener("load", () => {
- document.body.style.opacity = "1";
+  document.body.style.opacity = "1";
 });
