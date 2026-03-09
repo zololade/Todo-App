@@ -1,8 +1,5 @@
 import Page, { type PageData } from "../view/Page";
-import { HomeData } from "../model/todoPage";
-import { projectOutput } from "../model/transformers";
-
-console.log(Page.build(projectOutput));
+import { HomeData } from "../model/HomePage";
 
 export const mainContainer = document.getElementById("main");
 

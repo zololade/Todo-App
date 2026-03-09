@@ -1,12 +1,16 @@
 // import { type PageData } from "../view/Page";
-import { activities } from "../model/todo";
-import { buildActivityDetail } from "../model/todoPage";
+// import { activities } from "../model/todo";
+// import { buildActivityDetail } from "../model/todoPage";
+import { projects } from "../model/project";
+import { projectTransformer } from "../model/transformers";
+// import { projectTransformer } from "../model/transformers";
 import {
   mainContainer,
   renderElement,
   renderView,
 } from "./renderUtility";
 
+//initial app load render
 window.addEventListener("load", () => {
   if (!mainContainer) return;
   renderView("home");
@@ -19,10 +23,10 @@ mainContainer?.addEventListener("click", (e) => {
   const listItem = target.closest("li[data-id]");
 
   if (listItem) {
-    const activityId = Number(listItem.getAttribute("data-id"));
-    const activity = activities.find((a) => a.id === activityId);
+    const projectId = listItem.getAttribute("data-id");
+    const project = projects.find((a) => a.id === projectId);
 
-    if (activity) {
+    if (project) {
       // 1. Update Active State in UI
       mainContainer
         .querySelectorAll("#activity-list li")
@@ -37,7 +41,7 @@ mainContainer?.addEventListener("click", (e) => {
       // 2. Render Detail Panel
       const detailPanel = document.getElementById("activityInfo");
       if (detailPanel) {
-        const detailData = buildActivityDetail(activity);
+        const detailData = projectTransformer(project);
         renderElement(detailPanel, detailData);
       }
     }

@@ -1,3 +1,5 @@
+//sample data
+
 const activities = [
   {
     id: "abc",

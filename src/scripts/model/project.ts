@@ -1,3 +1,5 @@
+//sample data
+
 const projectA = {
   id: "xyz",
   title: "Prepare Presentation",
