@@ -1,13 +1,9 @@
 import Page, { type PageData } from "../view/Page";
 import { HomeData } from "../model/todoPage";
+import { projectOutput } from "../model/transformers";
 
-// export const mediaQuery = window.matchMedia("(max-width: 1100px)");
+console.log(Page.build(projectOutput));
 
-// export let currentLayout: "mobile" | "desktop" | null = null;
-// export function getLayoutMode(): "mobile" | "desktop" {
-//  return mediaQuery.matches ? "mobile" : "desktop";
-// }
-//
 export const mainContainer = document.getElementById("main");
 
 export const viewMap = {

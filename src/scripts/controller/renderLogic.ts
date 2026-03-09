@@ -7,13 +7,9 @@ import {
   renderView,
 } from "./renderUtility";
 
-// type Activity = "activities" | "activity";
-// let selectedActivity: Activity | null = null;
-
 window.addEventListener("load", () => {
   if (!mainContainer) return;
   renderView("home");
-  console.log(document.querySelector("#backBtn"));
 });
 
 // Event Delegation for Activity Selection
