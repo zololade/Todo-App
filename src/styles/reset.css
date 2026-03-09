@@ -1,0 +1,43 @@
+/* ============================================
+   1. DESIGN SYSTEM & MODERN RESET
+   ============================================ */
+*,
+*::before,
+*::after,
+button {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  all: unset;
+}
+
+button:focus,
+button:hover {
+  border: none;
+  outline: revert;
+  /* Reverts outline to browser default when focused */
+}
+
+body {
+  font-family:
+    "Inter",
+    -apple-system,
+    sans-serif;
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  height: 100vh;
+  display: flex;
+  flex-direction: row-reverse;
+  /* Flip layout: List Right, Detail Left */
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
+}

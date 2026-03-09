@@ -1,0 +1,45 @@
+/* ============================================
+   2. SIDEBAR (The Navigation/List)
+   ============================================ */
+#header {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 60px;
+  /* Slim Icon Bar */
+  height: 100vh;
+  background: var(--bg-card);
+  border-right: 1px solid var(--border);
+  display: flex;
+  justify-content: center;
+  padding: 2rem 0;
+  z-index: 100;
+}
+
+#header nav {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+#header nav button {
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  background: transparent;
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  padding: 0.25rem;
+  font-size: 0.75rem;
+}
+
+#header nav button.active {
+  background: var(--accent-soft);
+  color: var(--accent);
+}

@@ -1,0 +1,198 @@
+/* ============================================
+   3. THE DASHBOARD GRID
+   ============================================ */
+#main {
+  flex: 1;
+  margin-left: 60px;
+  /* Offset for slim nav */
+  display: grid !important;
+  /* Force override */
+  grid-template-columns: 380px 1fr;
+  height: 100vh;
+}
+
+/* --- Activity List (Middle Column) --- */
+#activity-list {
+  background: var(--bg-sidebar);
+  backdrop-filter: blur(20px);
+  border-right: 1px solid var(--border);
+  padding: 2.5rem 1.5rem;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-gutter: 0.5rem;
+  scrollbar-color: var(--thumb) var(--bg-sidebar);
+  animation: slideUp 0.5s ease-out;
+}
+
+#activity-list h2 {
+  font-size: var(--activities-span-h2);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+}
+
+#activity-list ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#activity-list li {
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-md);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid transparent;
+}
+
+#activity-list li:hover {
+  background: var(--accent-soft);
+}
+
+#activity-list li.active {
+  background: var(--bg-card);
+  border-color: var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+#activity-list li strong {
+  display: block;
+  font-size: var(--activities-span-h2);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+#activity-list li span {
+  font-size: var(--activities-span);
+  color: var(--text-secondary);
+}
+
+/* --- Activity Detail (Primary Focus Column) --- */
+#activity-detail {
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  background: var(--bg-app);
+  animation: slideUp 0.5s ease-out;
+}
+
+#activity-detail > div {
+  padding: 4rem 2rem calc(80px + 2rem) 2rem;
+  scrollbar-width: thin;
+  scrollbar-gutter: 0.5rem;
+  scrollbar-color: var(--thumb) var(--bg-app);
+  overflow-y: scroll;
+  height: 100vh;
+}
+
+#activityInfo > * {
+  animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#activity-detail h2 {
+  font-size: var(--h2);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  margin-bottom: 1.5rem;
+  line-height: 1.1;
+}
+
+#activity-detail p {
+  font-size: var(--para);
+  line-height: 1.6;
+  color: #424245;
+  margin-bottom: 1.2rem;
+}
+
+/* Custom Tag Styling */
+#activity-detail p:last-child {
+  margin-top: 2rem;
+  display: inline-block;
+  background: var(--accent-soft);
+  color: var(--accent);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: var(--para);
+  font-weight: 500;
+}
+
+/* ============================================
+   4. RESPONSIVE
+   ============================================ */
+@media (max-width: 1100px) {
+  #main {
+    grid-template-columns: 1fr;
+  }
+
+  #activity-detail {
+    display: none;
+  }
+
+  #main.show-detail #activity-list {
+    display: none;
+  }
+
+  #main.show-detail #activity-detail {
+    display: block;
+  }
+}
+
+/* ============================================
+   5. Activity  Nav
+   ============================================ */
+.activity-nav {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  background: var(--bg-app);
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 2rem;
+  z-index: 100;
+}
+
+.activity-nav button {
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  background: var(--bg-card);
+  cursor: pointer;
+  color: var(--text-primary);
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+.activity-nav button:hover {
+  border: 1px solid var(--border);
+}
+
+.activity-nav button:disabled {
+  color: var(--text-secondary);
+}
+
+.activity-nav button:hover:disabled {
+  border: 1px solid transparent;
+}

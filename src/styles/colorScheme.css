@@ -1,0 +1,81 @@
+/* ===== LIGHT (Default) ===== */
+
+:root,
+[data-theme="light"] {
+  --bg-app: #f5f5f7;
+  --bg-sidebar: rgba(255, 255, 255, 0.5);
+  --bg-card: #ffffff;
+
+  --text-primary: #1d1d1f;
+  --text-secondary: #6e6e73;
+
+  --border: rgba(0, 0, 0, 0.06);
+
+  --accent: #5e6ad2;
+  --accent-soft: rgba(94, 106, 210, 0.12);
+
+  --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.06);
+
+  --radius-lg: 18px;
+  --radius-md: 12px;
+  --thumb: #372f41;
+  --para: clamp(0.5rem, 0.5rem + 1vw, 1rem);
+  --activities-span: clamp(0.4rem, 0.5rem + 1vw, 0.8rem);
+  --activities-span-h2: clamp(0.4rem, 0.6rem + 1vw, 0.95rem);
+  --h2: clamp(1rem, 1vw + 1rem, 2rem);
+}
+
+/* ===== DARK ===== */
+[data-theme="dark"] {
+  --bg-app: #0f1115;
+  --bg-sidebar: rgba(22, 25, 32, 0.85);
+  --bg-card: #161920;
+
+  --text-primary: #e6e8ec;
+  --text-secondary: #8b92a1;
+
+  --border: rgba(255, 255, 255, 0.05);
+
+  --accent: #7c8cff;
+  --accent-soft: rgba(124, 140, 255, 0.15);
+
+  --shadow-sm: none;
+  --shadow-lg: none;
+}
+
+/* ===== SAGE (Muted Modern) ===== */
+[data-theme="sage"] {
+  --bg-app: #f3f5f2;
+  --bg-sidebar: rgba(255, 255, 255, 0.8);
+  --bg-card: #ffffff;
+
+  --text-primary: #2f3a33;
+  --text-secondary: #7b8a81;
+
+  --border: rgba(0, 0, 0, 0.05);
+
+  --accent: #6b8f71;
+  --accent-soft: rgba(107, 143, 113, 0.15);
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.06);
+}
+
+/* ===== SLATE (Professional Minimal) ===== */
+[data-theme="slate"] {
+  --bg-app: #f1f3f6;
+  --bg-sidebar: rgba(255, 255, 255, 0.9);
+  --bg-card: #ffffff;
+
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+
+  --border: rgba(0, 0, 0, 0.05);
+
+  --accent: #4b5563;
+  --accent-soft: rgba(75, 85, 99, 0.15);
+
+  --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.06);
+}

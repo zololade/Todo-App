@@ -1,4 +1,4 @@
-import "./styles/todo.css";
+import "./styles/index.css";
 import "./scripts/controller/renderUtility";
 import "./scripts/controller/buttonController";
 import "./scripts/controller/renderLogic";
