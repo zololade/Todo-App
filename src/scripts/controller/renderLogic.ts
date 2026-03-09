@@ -1,9 +1,5 @@
-// import { type PageData } from "../view/Page";
-// import { activities } from "../model/todo";
-// import { buildActivityDetail } from "../model/todoPage";
-import { projects } from "../model/project";
+import { projects } from "../model/sampleDate/project";
 import { projectTransformer } from "../model/transformers";
-// import { projectTransformer } from "../model/transformers";
 import {
   mainContainer,
   renderElement,
@@ -19,10 +15,13 @@ window.addEventListener("load", () => {
 // Event Delegation for Activity Selection
 mainContainer?.addEventListener("click", (e) => {
   if (!mainContainer) return;
+
+  //select an item from the list of available project list
   const target = e.target as HTMLElement;
   const listItem = target.closest("li[data-id]");
 
   if (listItem) {
+    //grab project id
     const projectId = listItem.getAttribute("data-id");
     const project = projects.find((a) => a.id === projectId);
 
@@ -38,7 +37,8 @@ mainContainer?.addEventListener("click", (e) => {
           .querySelector("#backBtn")
           ?.removeAttribute("disabled");
       }
-      // 2. Render Detail Panel
+
+      // 2. Render project Detail Panel
       const detailPanel = document.getElementById("activityInfo");
       if (detailPanel) {
         const detailData = projectTransformer(project);

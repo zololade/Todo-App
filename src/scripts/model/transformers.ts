@@ -1,6 +1,6 @@
-import { projects } from "./project";
-import { activities } from "./activity";
-import { tasks } from "./task";
+import { projects } from "./sampleDate/project";
+import { activities } from "./sampleDate/activity";
+import { tasks } from "./sampleDate/task";
 import { type PageData } from "../view/Page";
 interface ProcessedData {
   id: string;
