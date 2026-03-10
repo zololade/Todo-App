@@ -1,9 +1,8 @@
 import { mainContainer, renderView, viewMap } from "./renderUtility";
 
 //select the app hearder nav buttons
-const headerButtons = document.querySelectorAll<HTMLButtonElement>(
-  "#header nav button",
-);
+const headerButtons =
+  document.querySelectorAll<HTMLButtonElement>("#header nav button");
 
 //set active on clicked button and apply style
 function updateClickedButton(clickedBtn: HTMLButtonElement): void {
@@ -12,16 +11,15 @@ function updateClickedButton(clickedBtn: HTMLButtonElement): void {
 }
 
 //check if the data to view exist in view map
-function isValidView(
-  value: string | undefined,
-): value is keyof typeof viewMap {
+function isValidView(value: string | undefined): value is keyof typeof viewMap {
   return value !== undefined && value in viewMap;
 }
 
 //add click event listener that calls updateClickButton and rerender app
 headerButtons.forEach((button) => {
   button.addEventListener("click", (e) => {
-    let eventOwner = e.target as HTMLButtonElement;
+    const eventOwner = (e.target as HTMLElement).closest("button");
+    if (!eventOwner) return;
     updateClickedButton(eventOwner);
     // dataset that stores what the clicked button wants in view
     const view = eventOwner.dataset.page;

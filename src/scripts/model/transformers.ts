@@ -13,26 +13,26 @@ const taskBuilder = (
   tasksData: typeof tasks,
   isBuildingProject: ProcessedData,
 ) => {
-  let currentSubtask = activitiesData.find(
+  const currentSubtask = activitiesData.find(
     (subTask) => subTask.id === isBuildingProject.id,
   );
   if (!currentSubtask) return;
 
   return currentSubtask.subTask
     .map((element) => {
-      let Tasks = tasksData.find(
+      const Tasks = tasksData.find(
         (taskIdentity) => taskIdentity.subTaskId === element.id,
       );
 
       if (!Tasks) return;
-      let processedTasks = Tasks.taskData.map((data) => {
+      const processedTasks = Tasks.taskData.map((data) => {
         return {
           tag: "p",
           content: data.detail,
         };
       });
 
-      let result = [
+      const result = [
         {
           tag: "h3",
           content: element.title,
@@ -51,7 +51,7 @@ const projectTransformer = (
   projectItem: ProcessedData | undefined,
 ): PageData => {
   if (!projectItem) return { tag: "p", content: "project not found" };
-  let builtTask = taskBuilder(activities, tasks, projectItem);
+  const builtTask = taskBuilder(activities, tasks, projectItem);
   if (!builtTask) return { tag: "p", content: "tasks not found" };
   return [
     { tag: "h2", content: projectItem.title },

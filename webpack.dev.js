@@ -8,7 +8,7 @@ export default merge(common, {
   mode: "development",
   devtool: "eval-source-map",
   devServer: {
-    watchFiles: ["./src/template.html"],
+    watchFiles: ["./src/index.html"],
     static: path.join(__dirname, "dist"),
     compress: true,
     port: 4000,

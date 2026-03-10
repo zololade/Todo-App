@@ -7,7 +7,10 @@ const tasks = [
   },
   {
     subTaskId: "prepareId",
-    taskData: [{ detail: "details" }, { detail: "details" }],
+    taskData: [
+      { detail: "details", flag: "done" },
+      { detail: "details" },
+    ],
   },
 ];
 

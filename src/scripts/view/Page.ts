@@ -9,11 +9,7 @@ export type PageData = ElementObject | PageData[] | string | number;
 
 export default class Page {
   static isObject(value: unknown): value is ElementObject {
-    return (
-      typeof value === "object" &&
-      value !== null &&
-      !Array.isArray(value)
-    );
+    return typeof value === "object" && value !== null && !Array.isArray(value);
   }
 
   static build(
@@ -31,8 +27,7 @@ export default class Page {
       Object.entries(att).forEach(([key, value]) => {
         const lookupKey = key === "class" ? "className" : key;
         if (lookupKey in el) {
-          (el as unknown as Record<string, unknown>)[lookupKey] =
-            value;
+          (el as unknown as Record<string, unknown>)[lookupKey] = value;
         } else {
           (el as HTMLElement).setAttribute(key, String(value));
         }
