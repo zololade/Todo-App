@@ -1,0 +1,37 @@
+@import url(./projectList.css);
+@import url(./projectDetail.css);
+@import url(./projectDetailNav.css);
+
+/* ============================================
+   3. THE DASHBOARD GRID
+   ============================================ */
+#main {
+  flex: 1;
+  margin-left: 60px;
+  /* Offset for slim nav */
+  display: grid !important;
+  /* Force override */
+  grid-template-columns: 380px 1fr;
+  height: 100vh;
+}
+
+/* ============================================
+   4. RESPONSIVE
+   ============================================ */
+@media (max-width: 1100px) {
+  #main {
+    grid-template-columns: 1fr;
+  }
+
+  #project-detail {
+    display: none;
+  }
+
+  #main.show-detail #project-list {
+    display: none;
+  }
+
+  #main.show-detail #project-detail {
+    display: block;
+  }
+}

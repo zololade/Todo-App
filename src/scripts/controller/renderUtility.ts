@@ -25,7 +25,9 @@ export function renderElement(host: HTMLElement, data: PageData) {
     const fragment = Page.build(data);
     Page.render(host, fragment);
   };
-  document.startViewTransition
-    ? document.startViewTransition(render)
-    : render();
+  if (document.startViewTransition) {
+    document.startViewTransition(render);
+  } else if (!document.startViewTransition) {
+    render();
+  }
 }

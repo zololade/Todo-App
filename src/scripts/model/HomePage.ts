@@ -1,29 +1,28 @@
 // import { activities, type Activity } from "./todo";
 import type { PageData } from "../view/Page";
-import { activitiesSection } from "./transformers";
+import { projectListSection } from "./transformers";
 
 // The welcome message shown in Section 1 before anything is selected
 export const welcomeDetail: PageData = {
   tag: "div",
-  id: "activityInfo",
+  id: "projectInfo",
   content: [
     { tag: "h2", content: "Welcome to your Todo App" },
     {
       tag: "p",
-      content:
-        "Select an activity from the list to see its full details here.",
+      content: "Select an activity from the list to see its full details here.",
     },
   ],
 };
 
 // The full todo page data: both sections together
-export const activityDetail: PageData = {
+export const projectDetail: PageData = {
   tag: "section",
-  id: "activity-detail",
+  id: "project-detail",
   content: [
     {
       tag: "nav",
-      class: "activity-nav",
+      class: "project-detail-nav",
       content: [
         {
           tag: "button",
@@ -37,4 +36,4 @@ export const activityDetail: PageData = {
   ], // Section 1 starts with welcome message
 };
 
-export const HomeData = [activitiesSection, activityDetail];
+export const HomeData = [projectListSection, projectDetail];

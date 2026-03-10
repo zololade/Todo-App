@@ -1,0 +1,48 @@
+/* --- Activity Detail (Primary Focus Column) --- */
+#project-detail {
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  background: var(--bg-app);
+  animation: slideUp 0.5s ease-out;
+}
+
+#project-detail > #projectInfo {
+  padding: 4rem 2rem calc(80px + 2rem) 2rem;
+  scrollbar-width: thin;
+  scrollbar-gutter: 0.5rem;
+  scrollbar-color: var(--thumb) var(--bg-app);
+  overflow-y: scroll;
+  height: 100vh;
+}
+
+#projectInfo > * {
+  animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#project-detail h2 {
+  font-size: var(--h2);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  margin-bottom: 1.5rem;
+  line-height: 1.1;
+}
+
+#project-detail p {
+  font-size: var(--para);
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: 1.2rem;
+}

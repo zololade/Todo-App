@@ -1,10 +1,6 @@
 import { projects } from "../model/sampleDate/project";
 import { projectTransformer } from "../model/transformers";
-import {
-  mainContainer,
-  renderElement,
-  renderView,
-} from "./renderUtility";
+import { mainContainer, renderElement, renderView } from "./renderUtility";
 
 //initial app load render
 window.addEventListener("load", () => {
@@ -28,18 +24,16 @@ mainContainer?.addEventListener("click", (e) => {
     if (project) {
       // 1. Update Active State in UI
       mainContainer
-        .querySelectorAll("#activity-list li")
+        .querySelectorAll("#project-list li")
         .forEach((el) => el.classList.remove("active"));
       listItem.classList.add("active");
-      if (window.innerWidth < 1100) {
+      if (matchMedia("(max-width:1100px)")) {
         mainContainer.classList.toggle("show-detail");
-        document
-          .querySelector("#backBtn")
-          ?.removeAttribute("disabled");
+        document.querySelector("#backBtn")?.removeAttribute("disabled");
       }
 
       // 2. Render project Detail Panel
-      const detailPanel = document.getElementById("activityInfo");
+      const detailPanel = document.getElementById("projectInfo");
       if (detailPanel) {
         const detailData = projectTransformer(project);
         renderElement(detailPanel, detailData);

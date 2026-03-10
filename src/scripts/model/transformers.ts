@@ -19,7 +19,7 @@ const taskBuilder = (
   if (!currentSubtask) return;
 
   return currentSubtask.subTask
-    .map((element) => {
+    .flatMap((element) => {
       const Tasks = tasksData.find(
         (taskIdentity) => taskIdentity.subTaskId === element.id,
       );
@@ -27,7 +27,7 @@ const taskBuilder = (
       if (!Tasks) return;
       const processedTasks = Tasks.taskData.map((data) => {
         return {
-          tag: "p",
+          tag: "li",
           content: data.detail,
         };
       });
@@ -38,7 +38,7 @@ const taskBuilder = (
           content: element.title,
         },
         {
-          tag: "div",
+          tag: "ul",
           content: processedTasks,
         },
       ];
@@ -62,11 +62,10 @@ const projectTransformer = (
     {
       tag: "div",
       content: builtTask,
+      class: "subTask",
     },
   ];
 };
-
-// Builds the full detail view for a single activity (Section 1)
 
 // Builds a single list item (overview) for Section 2
 function projectLI(projectListItem: ProcessedData): PageData {
@@ -83,9 +82,9 @@ function projectLI(projectListItem: ProcessedData): PageData {
   };
 }
 
-const activitiesSection: PageData = {
+const projectListSection: PageData = {
   tag: "section",
-  id: "activity-list",
+  id: "project-list",
   content: [
     { tag: "h2", content: "Your Activities" },
     {
@@ -95,4 +94,4 @@ const activitiesSection: PageData = {
   ],
 };
 
-export { projectTransformer, projectLI, activitiesSection };
+export { projectTransformer, projectLI, projectListSection };
