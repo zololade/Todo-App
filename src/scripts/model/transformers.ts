@@ -1,6 +1,6 @@
 import { projects } from "./sampleDate/project";
 import { activities } from "./sampleDate/activity";
-import { tasks } from "./sampleDate/task";
+import { taskGetter } from "./sampleDate/task";
 import { type PageData } from "../view/Page";
 interface ProcessedData {
   id: string;
@@ -8,9 +8,9 @@ interface ProcessedData {
   overview: string;
 }
 
-const taskBuilder = (
+export const taskBuilder = (
   activitiesData: typeof activities,
-  tasksData: typeof tasks,
+  tasksData: ReturnType<typeof taskGetter>,
   isBuildingProject: ProcessedData,
 ) => {
   const currentSubtask = activitiesData.find(
@@ -25,23 +25,29 @@ const taskBuilder = (
       );
 
       if (!Tasks) return;
+      if (Tasks.taskData.every((data) => data.flags?.includes("done"))) return;
       const processedTasks = Tasks.taskData.map((data) => {
         return {
           tag: "li",
           content: data.detail,
+          "data-id": data.id,
         };
       });
 
-      const result = [
-        {
-          tag: "h3",
-          content: element.title,
-        },
-        {
-          tag: "ul",
-          content: processedTasks,
-        },
-      ];
+      const result = {
+        tag: "article",
+        content: [
+          {
+            tag: "h3",
+            content: element.title,
+          },
+          {
+            tag: "ul",
+            content: processedTasks,
+          },
+        ],
+        "data-id": element.id,
+      };
       return result;
     })
     .filter((data) => !!data);
@@ -51,7 +57,7 @@ const projectTransformer = (
   projectItem: ProcessedData | undefined,
 ): PageData => {
   if (!projectItem) return { tag: "p", content: "project not found" };
-  const builtTask = taskBuilder(activities, tasks, projectItem);
+  const builtTask = taskBuilder(activities, taskGetter(), projectItem);
   if (!builtTask) return { tag: "p", content: "tasks not found" };
   return [
     { tag: "h2", content: projectItem.title },
@@ -86,7 +92,7 @@ const projectListSection: PageData = {
   tag: "section",
   id: "project-list",
   content: [
-    { tag: "h2", content: "Your Activities" },
+    { tag: "h2", content: "Your Projects" },
     {
       tag: "ul",
       content: projects.map(projectLI),

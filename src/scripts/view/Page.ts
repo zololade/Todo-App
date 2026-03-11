@@ -8,6 +8,8 @@ export type ElementObject = {
 export type PageData = ElementObject | PageData[] | string | number;
 
 export default class Page {
+  private static DOM_RECORD: Map<HTMLElement, PageData> = new Map();
+
   static isObject(value: unknown): value is ElementObject {
     return typeof value === "object" && value !== null && !Array.isArray(value);
   }
@@ -50,10 +52,26 @@ export default class Page {
     return el;
   }
 
-  static render(
+  static snapshotRender(currentHost: HTMLElement, elem: PageData): void {
+    const previousRecord = Page.DOM_RECORD.get(currentHost);
+    if (
+      previousRecord &&
+      JSON.stringify(previousRecord) === JSON.stringify(elem)
+    )
+      return;
+
+    currentHost.innerHTML = "";
+    const fragment = document.createDocumentFragment();
+    fragment.appendChild(Page.build(elem));
+    currentHost.appendChild(fragment);
+
+    Page.DOM_RECORD.set(currentHost, elem);
+  }
+
+  static pureRender(
     host: HTMLElement,
     elem: HTMLElement | DocumentFragment | Text,
-  ): void {
+  ) {
     host.innerHTML = "";
     const fragment = document.createDocumentFragment();
     fragment.appendChild(elem);

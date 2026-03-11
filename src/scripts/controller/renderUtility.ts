@@ -14,20 +14,30 @@ export function renderView(view: keyof typeof viewMap) {
   if (!mainContainer) return;
   if (currentView === view) return;
   currentView = view;
-  renderElement(mainContainer, viewMap[view]);
+  const fromRenderView = true;
+  renderElement(mainContainer, viewMap[view], fromRenderView);
 }
 
 // a utility fuction that render processed data in the supplied host
-export function renderElement(host: HTMLElement, data: PageData) {
+export function renderElement(
+  host: HTMLElement,
+  data: PageData,
+  skipDiff?: boolean,
+) {
   //check if host is available
   if (!host) return;
   const render = () => {
-    const fragment = Page.build(data);
-    Page.render(host, fragment);
+    if (skipDiff) {
+      const fragment = Page.build(data);
+      Page.pureRender(host, fragment);
+    } else {
+      Page.snapshotRender(host, data);
+    }
   };
+
   if (document.startViewTransition) {
     document.startViewTransition(render);
-  } else if (!document.startViewTransition) {
+  } else {
     render();
   }
 }

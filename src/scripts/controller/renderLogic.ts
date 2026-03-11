@@ -2,6 +2,7 @@ import { projects } from "../model/sampleDate/project";
 import { projectTransformer } from "../model/transformers";
 import { mainContainer, renderElement, renderView } from "./renderUtility";
 
+let currentProject: (typeof projects)[0] | null = null;
 //initial app load render
 window.addEventListener("load", () => {
   if (!mainContainer) return;
@@ -22,6 +23,7 @@ mainContainer?.addEventListener("click", (e) => {
     const project = projects.find((a) => a.id === projectId);
 
     if (project) {
+      currentProject = project;
       // 1. Update Active State in UI
       mainContainer
         .querySelectorAll("#project-list li")
@@ -41,3 +43,7 @@ mainContainer?.addEventListener("click", (e) => {
     }
   }
 });
+
+export const getCurrentProject = () => {
+  return currentProject;
+};

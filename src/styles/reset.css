@@ -18,7 +18,6 @@ button:focus,
 button:hover {
   border: none;
   outline: revert;
-  /* Reverts outline to browser default when focused */
 }
 
 body {
@@ -30,8 +29,7 @@ body {
   color: var(--text-primary);
   height: 100vh;
   display: flex;
-  flex-direction: row-reverse;
-  /* Flip layout: List Right, Detail Left */
+  flex-direction: row;
   overflow: hidden;
   -webkit-font-smoothing: antialiased;
 }
