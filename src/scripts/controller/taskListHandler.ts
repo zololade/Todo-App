@@ -1,8 +1,8 @@
 import { mainContainer, renderElement } from "./renderUtility";
-import { taskGetter, taskModifier } from "../model/sampleDate/task";
+import { taskGetter, taskModifier } from "../store/task";
 import { taskBuilder } from "../model/transformers";
-import { getCurrentProject } from "./renderLogic";
-import { activities } from "../model/sampleDate/activity";
+import { getCurrentProject } from "./projectController";
+import { activities } from "../store/activity";
 // Event Delegation for Activity Selection
 mainContainer?.addEventListener("click", (e) => {
   if (!mainContainer) return;

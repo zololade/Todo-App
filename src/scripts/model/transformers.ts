@@ -1,6 +1,6 @@
-import { projects } from "./sampleDate/project";
-import { activities } from "./sampleDate/activity";
-import { taskGetter } from "./sampleDate/task";
+import { projects } from "../store/project";
+import { activities } from "../store/activity";
+import { taskGetter } from "../store/task";
 import { type PageData } from "../view/Page";
 interface ProcessedData {
   id: string;

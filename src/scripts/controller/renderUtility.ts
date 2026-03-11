@@ -1,5 +1,5 @@
 import Page, { type PageData } from "../view/Page";
-import { HomeData } from "../model/HomePage";
+import { HomeData } from "../model/homeView";
 
 export const mainContainer = document.getElementById("main");
 

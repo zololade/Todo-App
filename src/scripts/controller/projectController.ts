@@ -1,4 +1,4 @@
-import { projects } from "../model/sampleDate/project";
+import { projects } from "../store/project";
 import { projectTransformer } from "../model/transformers";
 import { mainContainer, renderElement, renderView } from "./renderUtility";
 
