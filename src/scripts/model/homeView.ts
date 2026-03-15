@@ -1,6 +1,6 @@
 // import { activities, type Activity } from "./todo";
 import type { PageData } from "../view/Page";
-import { projectListSection } from "./transformers";
+import { projectListGetter } from "./transformers";
 
 // The welcome message shown in Section 1 before anything is selected
 export const welcomeDetail: PageData = {
@@ -36,4 +36,4 @@ export const projectDetail: PageData = {
   ], // Section 1 starts with welcome message
 };
 
-export const HomeData = [projectListSection, projectDetail];
+export const HomeData = [projectListGetter(), projectDetail];

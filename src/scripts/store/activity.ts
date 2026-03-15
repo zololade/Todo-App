@@ -5,15 +5,15 @@ const activities = [
     id: "abc",
     subTask: [
       {
-        title: "slis",
+        title: "slims",
         id: "sidesId",
       },
       {
-        title: "prepion",
-        id: "prereId",
+        title: "preunion",
+        id: "peerId",
       },
       {
-        title: "faities",
+        title: "fatties",
         id: "faId",
       },
     ],
@@ -31,7 +31,7 @@ const activities = [
       },
       {
         title: "facilities",
-        id: "faciId",
+        id: "factId",
       },
     ],
   },

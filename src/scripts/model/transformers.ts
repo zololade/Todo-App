@@ -1,4 +1,4 @@
-import { projects } from "../store/project";
+import { projectsGetter } from "../store/project";
 import { activities } from "../store/activity";
 import { taskGetter } from "../store/task";
 import { type PageData } from "../view/Page";
@@ -88,16 +88,22 @@ function projectLI(projectListItem: ProcessedData): PageData {
   };
 }
 
-const projectListSection: PageData = {
-  tag: "section",
-  id: "project-list",
-  content: [
-    { tag: "h2", content: "Your Projects" },
-    {
-      tag: "ul",
-      content: projects.map(projectLI),
-    },
-  ],
-};
+function projectListGetter(): PageData {
+  return {
+    tag: "section",
+    id: "project-list",
+    content: [
+      { tag: "h2", content: "Your Projects" },
+      {
+        tag: "ul",
+        content: [...projectsGetter()]
+          .sort((itemA, itemB) => {
+            return itemA.createdAt - itemB.createdAt;
+          })
+          .map(projectLI),
+      },
+    ],
+  };
+}
 
-export { projectTransformer, projectLI, projectListSection };
+export { projectTransformer, projectLI, projectListGetter };

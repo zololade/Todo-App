@@ -14,12 +14,14 @@ describe("projectModifier", () => {
         overview:
           "Keep the talk and slides simple: what are the three things about this that everyone should remember?",
         flags: ["pinned"],
+        createdAt: 1773585160736,
       },
       {
         id: "abc",
         title: "Go to market",
         overview: "Activities to perform at each store in the market",
         flags: ["archived"],
+        createdAt: 1773585164956,
       },
     ];
 
@@ -43,12 +45,14 @@ describe("projectModifier", () => {
         overview:
           "Keep the talk and slides simple: what are the three things about this that everyone should remember?",
         flags: null,
+        createdAt: 1773585160736,
       },
       {
         id: "abc",
         title: "Go to market",
         overview: "Activities to perform at each store in the market",
         flags: ["archived", "pinned"],
+        createdAt: 1773585164956,
       },
     ];
 
@@ -74,12 +78,14 @@ describe("projectModifier", () => {
         overview:
           "Keep the talk and slides simple: what are the three things about this that everyone should remember?",
         flags: null,
+        createdAt: 1773585160736,
       },
       {
         id: "abc",
         title: "Go to market",
         overview: "Activities to perform at each store in the market",
         flags: null,
+        createdAt: 1773585164956,
       },
     ];
 

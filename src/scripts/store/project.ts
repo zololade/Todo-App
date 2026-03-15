@@ -1,9 +1,10 @@
 //sample data
-interface SingleProject {
+export interface SingleProject {
   id: string;
   title: string;
   overview: string;
   flags: null | string[]; //remember to remove optional
+  createdAt: number;
 }
 
 const initialProjects: SingleProject[] = [
@@ -13,12 +14,14 @@ const initialProjects: SingleProject[] = [
     overview:
       "Keep the talk and slides simple: what are the three things about this that everyone should remember?",
     flags: null,
+    createdAt: 1773585160736,
   },
   {
     id: "abc",
     title: "Go to market",
     overview: "Activities to perform at each store in the market",
     flags: null,
+    createdAt: 1773585164956,
   },
 ];
 
@@ -51,5 +54,3 @@ export function projectsGetter() {
 export function resetProjects() {
   projects = initialProjects.map((project) => project);
 }
-
-export { projects };

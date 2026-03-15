@@ -1,8 +1,8 @@
-import { projects } from "../store/project";
+import { projectsGetter, type SingleProject } from "../store/project";
 import { projectTransformer } from "../model/transformers";
 import { mainContainer, renderElement, renderView } from "./renderUtility";
 
-let currentProject: (typeof projects)[0] | null = null;
+let currentProject: SingleProject | null = null;
 //initial app load render
 window.addEventListener("load", () => {
   if (!mainContainer) return;
@@ -20,7 +20,7 @@ mainContainer?.addEventListener("click", (e) => {
   if (listItem) {
     //grab project id
     const projectId = listItem.getAttribute("data-id");
-    const project = projects.find((a) => a.id === projectId);
+    const project = projectsGetter().find((a) => a.id === projectId);
 
     if (project) {
       currentProject = project;
