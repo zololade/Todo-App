@@ -1,6 +1,6 @@
 import { mainContainer, renderView, viewMap } from "./renderUtility";
 
-//select the app hearder nav buttons
+//select the app header nav buttons
 const headerButtons =
   document.querySelectorAll<HTMLButtonElement>("#header nav button");
 

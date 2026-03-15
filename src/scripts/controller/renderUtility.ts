@@ -18,7 +18,7 @@ export function renderView(view: keyof typeof viewMap) {
   renderElement(mainContainer, viewMap[view], fromRenderView);
 }
 
-// a utility fuction that render processed data in the supplied host
+// a utility function that render processed data in the supplied host
 export function renderElement(
   host: HTMLElement,
   data: PageData,

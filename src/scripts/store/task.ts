@@ -9,7 +9,7 @@ interface TaskStructure {
   taskData: SingleTask[];
 }
 
-let tasks: TaskStructure[] = [
+const initialTasks: TaskStructure[] = [
   {
     subTaskId: "slidesId",
     taskData: [
@@ -28,13 +28,15 @@ let tasks: TaskStructure[] = [
         flags: null,
       },
       { id: "two", detail: "Checkout books recommendations", flags: null },
-      { id: "three", detail: "Time a full reharsal", flags: null },
+      { id: "three", detail: "Time a full rehearsal", flags: null },
       { id: "four", detail: "Do practice run with eric", flags: null },
       { id: "five", detail: "Confirm presentation time", flags: null },
       { id: "six", detail: "Print handouts for attendees", flags: null },
     ],
   },
 ];
+
+let tasks = [...initialTasks];
 
 export function taskModifier(subTaskId: string, taskId: string, flag: string) {
   const currentTask = tasks.find((arr) => subTaskId === arr.subTaskId);
@@ -58,6 +60,12 @@ export function taskModifier(subTaskId: string, taskId: string, flag: string) {
     return { ...task, taskData: newTaskData };
   });
 }
+
 export function taskGetter() {
   return tasks;
+}
+
+//for testing purpose
+export function resetTasks() {
+  tasks = initialTasks.map((t) => ({ ...t, taskData: [...t.taskData] }));
 }
