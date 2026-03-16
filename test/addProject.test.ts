@@ -1,5 +1,5 @@
 import {
-  sampleDataGetter as projectsGetter,
+  projectsDataGetter as projectsGetter,
   resetProjects,
   addProject,
   InputData,

@@ -1,6 +1,6 @@
 import {
   taskModifier,
-  sampleDataGetter as projectsGetter,
+  projectsDataGetter as projectsGetter,
   resetProjects,
 } from "../src/scripts/store/store";
 import { describe, expect, it, beforeEach } from "vitest";

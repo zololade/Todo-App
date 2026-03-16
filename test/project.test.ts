@@ -1,7 +1,7 @@
 import {
   projectModifier,
   resetProjects,
-  sampleDataGetter as projectsGetter,
+  projectsDataGetter as projectsGetter,
 } from "../src/scripts/store/store";
 import { describe, expect, it, beforeEach } from "vitest";
 import { sampleData } from "./sampleData";

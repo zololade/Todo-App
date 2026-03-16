@@ -1,5 +1,5 @@
 import {
-  sampleDataGetter as projectsGetter,
+  projectsDataGetter as projectsGetter,
   type Project,
 } from "../store/store";
 import { type PageData } from "../view/Page";

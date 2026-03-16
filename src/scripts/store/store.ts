@@ -39,11 +39,11 @@ const storedData =
   typeof localStorage !== "undefined" && localStorage.getItem("todoData");
 
 let workingProjectData = !storedData ? [] : [...JSON.parse(storedData)];
-export function sampleDataGetter(): Project[] {
+export function projectsDataGetter(): Project[] {
   return workingProjectData;
 }
 
-function sampleDataSetter(newProjectsData: Project[]) {
+function projectsDataSetter(newProjectsData: Project[]) {
   workingProjectData = newProjectsData;
   if (typeof localStorage !== "undefined") {
     localStorage.setItem("todoData", JSON.stringify(newProjectsData));
@@ -51,20 +51,20 @@ function sampleDataSetter(newProjectsData: Project[]) {
 }
 
 function getProject(id: string) {
-  return sampleDataGetter().find((project) => project.id === id);
+  return projectsDataGetter().find((project) => project.id === id);
 }
 
 export function projectModifier(id: string, flag: string) {
   const currentProject = getProject(id);
   if (!currentProject) return;
-  const projects = sampleDataGetter().map((data) => {
+  const projects = projectsDataGetter().map((data) => {
     if (data.id !== currentProject.id) return data;
     return {
       ...currentProject,
       flags: toggleFlag(currentProject.flags, flag),
     };
   });
-  sampleDataSetter(projects);
+  projectsDataSetter(projects);
 }
 /*
 ====================
@@ -73,7 +73,7 @@ export function projectModifier(id: string, flag: string) {
 */
 
 function getTask(projectId: string, subTaskId: string) {
-  return sampleDataGetter()
+  return projectsDataGetter()
     .find((project) => project.id === projectId)
     ?.subtasks.find((data) => data.id === subTaskId);
 }
@@ -83,7 +83,7 @@ function insertTaskData(
   subTaskId: string,
   newTasks: Tasks[],
 ) {
-  const projects = sampleDataGetter().find(
+  const projects = projectsDataGetter().find(
     (project) => project.id === projectId,
   );
   if (!projects) return;
@@ -96,15 +96,15 @@ function insertTaskData(
     };
   });
 
-  const buildProject = sampleDataGetter().map((project) => {
+  const buildProject = projectsDataGetter().map((project) => {
     if (project.id !== projectId) return project;
     return {
-      ...sampleDataGetter().find((project) => project.id === projectId),
+      ...projectsDataGetter().find((project) => project.id === projectId),
       subtasks: buildSubTask,
     };
   });
 
-  sampleDataSetter(buildProject as Project[]);
+  projectsDataSetter(buildProject as Project[]);
 }
 
 export function taskModifier(
@@ -169,7 +169,7 @@ export function addProject(newProjectData: InputData) {
     subtasks: isBuildingSubtask ? isBuildingSubtask : [],
   };
 
-  sampleDataSetter([...sampleDataGetter(), isBuildingProject]);
+  projectsDataSetter([...projectsDataGetter(), isBuildingProject]);
 }
 
 //utility

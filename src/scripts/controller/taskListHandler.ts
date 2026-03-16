@@ -1,7 +1,7 @@
 import { mainContainer, renderElement } from "./renderUtility";
 import { taskBuilder } from "../model/transformers";
 import {
-  sampleDataGetter as projectsGetter,
+  projectsDataGetter as projectsGetter,
   taskModifier,
 } from "../store/store";
 // Event Delegation for Activity Selection
