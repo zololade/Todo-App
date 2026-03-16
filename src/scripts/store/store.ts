@@ -15,10 +15,20 @@ export interface Project {
   }[];
 }
 
+export type SingleSubtask = Project["subtasks"][number];
 interface Tasks {
   id: string;
   detail: string;
   flags: string[] | null;
+}
+
+export interface InputData {
+  title: string;
+  overview: string;
+  subtasks?: {
+    title: string;
+    tasks?: string[];
+  }[];
 }
 /*
 ====================
@@ -120,6 +130,46 @@ export function taskModifier(
   });
 
   insertTaskData(projectId, subTaskId, updatedTask);
+}
+
+/*
+====================
+===  add project ===
+====================
+*/
+
+export function addProject(newProjectData: InputData) {
+  const newSubtasks = newProjectData.subtasks && newProjectData.subtasks;
+
+  const isBuildingSubtask =
+    newSubtasks &&
+    newSubtasks.map((data) => {
+      const newTasks = data.tasks && data.tasks;
+      return {
+        id: crypto.randomUUID(),
+        title: data.title,
+        tasks: newTasks
+          ? newTasks.map((taskDetail) => {
+              return {
+                id: crypto.randomUUID(),
+                detail: taskDetail,
+                flags: null,
+              };
+            })
+          : [],
+      };
+    });
+
+  const isBuildingProject: Project = {
+    id: crypto.randomUUID(),
+    title: newProjectData.title,
+    overview: newProjectData.overview,
+    flags: null,
+    createdAt: Date.now(),
+    subtasks: isBuildingSubtask ? isBuildingSubtask : [],
+  };
+
+  sampleDataSetter([...sampleDataGetter(), isBuildingProject]);
 }
 
 //utility

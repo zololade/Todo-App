@@ -34,8 +34,6 @@ describe("taskModifier()", () => {
 
   it("should return a task object", () => {
     const receivedObject = projectsGetter().find((data) => data.id === "xyz");
-    console.log(receivedObject);
-
     expect(receivedObject).toEqual(tasks);
   });
 });
