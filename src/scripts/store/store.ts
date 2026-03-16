@@ -25,26 +25,24 @@ interface Tasks {
 ====  project  =====
 ====================
 */
-const storedData = localStorage.getItem("todoData");
+const storedData =
+  typeof localStorage !== "undefined" && localStorage.getItem("todoData");
 
 let workingProjectData = !storedData ? [] : [...JSON.parse(storedData)];
-console.log(workingProjectData);
 export function sampleDataGetter(): Project[] {
   return workingProjectData;
 }
 
 function sampleDataSetter(newProjectsData: Project[]) {
   workingProjectData = newProjectsData;
-  localStorage.setItem("todoData", JSON.stringify(newProjectsData));
+  if (typeof localStorage !== "undefined") {
+    localStorage.setItem("todoData", JSON.stringify(newProjectsData));
+  }
 }
 
 function getProject(id: string) {
   return sampleDataGetter().find((project) => project.id === id);
 }
-
-// export function resetProjects() {
-//   workingProjectData = sampleData.map((project) => project);
-// }
 
 export function projectModifier(id: string, flag: string) {
   const currentProject = getProject(id);
@@ -136,4 +134,9 @@ function toggleFlag(
         ? null
         : [...currentFlags.filter((data) => flag !== data)]
       : [flag, ...currentFlags];
+}
+
+//for testing purpose
+export function resetProjects(seedData: Project[] = []) {
+  workingProjectData = seedData;
 }
