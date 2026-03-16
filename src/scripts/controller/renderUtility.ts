@@ -1,11 +1,11 @@
 import Page, { type PageData } from "../view/Page";
-import { HomeData } from "../model/homeView";
+import { getHomeData } from "../model/homeView";
 
 export const mainContainer = document.getElementById("main");
 
 //map that contains all app view state
 export const viewMap = {
-  home: HomeData,
+  home: getHomeData(),
 } as const;
 let currentView: keyof typeof viewMap | null = null;
 

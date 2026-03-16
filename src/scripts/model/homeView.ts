@@ -35,4 +35,6 @@ export const projectDetail: PageData = {
   ], // Section 1 starts with welcome message
 };
 
-export const HomeData = [projectListGetter(), projectDetail];
+export function getHomeData(): PageData {
+  return [projectListGetter(), projectDetail];
+}
