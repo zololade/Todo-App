@@ -63,7 +63,7 @@ const projectTransformer = (projectItem: Project | undefined): PageData => {
 function projectLI(projectListItem: Project): PageData {
   return {
     tag: "li",
-    "data-id": projectListItem.id, // you'll use this later to know which was hovered/clicked
+    "data-id": projectListItem.id,
     content: [
       { tag: "strong", content: projectListItem.title },
       {

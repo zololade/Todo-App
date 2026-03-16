@@ -5,7 +5,7 @@ export const mainContainer = document.getElementById("main");
 
 //map that contains all app view state
 export const viewMap = {
-  home: getHomeData(),
+  home: getHomeData,
 } as const;
 let currentView: keyof typeof viewMap | null = null;
 
@@ -15,7 +15,7 @@ export function renderView(view: keyof typeof viewMap) {
   if (currentView === view) return;
   currentView = view;
   const fromRenderView = true;
-  renderElement(mainContainer, viewMap[view], fromRenderView);
+  renderElement(mainContainer, viewMap[view](), fromRenderView);
 }
 
 // a utility function that render processed data in the supplied host
