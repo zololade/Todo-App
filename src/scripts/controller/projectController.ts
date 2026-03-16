@@ -1,8 +1,12 @@
-import { projectsGetter, type SingleProject } from "../store/project";
+import {
+  sampleDataGetter as projectsGetter,
+  type Project,
+} from "../store/store";
 import { projectTransformer } from "../model/transformers";
 import { mainContainer, renderElement, renderView } from "./renderUtility";
 
-let currentProject: SingleProject | null = null;
+let currentProject: Project | null = null;
+
 //initial app load render
 window.addEventListener("load", () => {
   if (!mainContainer) return;

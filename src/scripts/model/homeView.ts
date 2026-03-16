@@ -1,4 +1,3 @@
-// import { activities, type Activity } from "./todo";
 import type { PageData } from "../view/Page";
 import { projectListGetter } from "./transformers";
 

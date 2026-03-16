@@ -1,32 +1,19 @@
-import { projectsGetter } from "../store/project";
-import { activities } from "../store/activity";
-import { taskGetter } from "../store/task";
+import {
+  sampleDataGetter as projectsGetter,
+  type Project,
+} from "../store/store";
 import { type PageData } from "../view/Page";
-interface ProcessedData {
-  id: string;
-  title: string;
-  overview: string;
-}
 
-export const taskBuilder = (
-  activitiesData: typeof activities,
-  tasksData: ReturnType<typeof taskGetter>,
-  isBuildingProject: ProcessedData,
-) => {
-  const currentSubtask = activitiesData.find(
-    (subTask) => subTask.id === isBuildingProject.id,
-  );
-  if (!currentSubtask) return;
+export const taskBuilder = (isBuildingProject: Project) => {
+  const currentSubtask = isBuildingProject.subtasks;
 
-  return currentSubtask.subTask
+  return currentSubtask
     .flatMap((element) => {
-      const Tasks = tasksData.find(
-        (taskIdentity) => taskIdentity.subTaskId === element.id,
-      );
+      const Tasks = element.tasks;
 
-      if (!Tasks) return;
-      if (Tasks.taskData.every((data) => data.flags?.includes("done"))) return;
-      const processedTasks = Tasks.taskData.map((data) => {
+      if (Tasks.every((data) => data.flags?.includes("done"))) return;
+
+      const processedTasks = Tasks.map((data) => {
         return {
           tag: "li",
           content: data.detail,
@@ -53,12 +40,9 @@ export const taskBuilder = (
     .filter((data) => !!data);
 };
 
-const projectTransformer = (
-  projectItem: ProcessedData | undefined,
-): PageData => {
+const projectTransformer = (projectItem: Project | undefined): PageData => {
   if (!projectItem) return { tag: "p", content: "project not found" };
-  const builtTask = taskBuilder(activities, taskGetter(), projectItem);
-  if (!builtTask) return { tag: "p", content: "tasks not found" };
+  const builtTask = taskBuilder(projectItem);
   return [
     { tag: "h2", content: projectItem.title },
     {
@@ -69,12 +53,13 @@ const projectTransformer = (
       tag: "div",
       content: builtTask,
       class: "subTask",
+      "data-id": projectItem.id,
     },
   ];
 };
 
 // Builds a single list item (overview) for Section 2
-function projectLI(projectListItem: ProcessedData): PageData {
+function projectLI(projectListItem: Project): PageData {
   return {
     tag: "li",
     "data-id": projectListItem.id, // you'll use this later to know which was hovered/clicked

@@ -1,8 +1,9 @@
 import { mainContainer, renderElement } from "./renderUtility";
-import { taskGetter, taskModifier } from "../store/task";
 import { taskBuilder } from "../model/transformers";
-import { getCurrentProject } from "./projectController";
-import { activities } from "../store/activity";
+import {
+  sampleDataGetter as projectsGetter,
+  taskModifier,
+} from "../store/store";
 // Event Delegation for Activity Selection
 mainContainer?.addEventListener("click", (e) => {
   if (!mainContainer) return;
@@ -14,19 +15,23 @@ mainContainer?.addEventListener("click", (e) => {
   const listItem = target.closest(".subTask>article>ul> li") as HTMLElement;
   if (article && listItem && parent) {
     //grab project id
+    const projectId = parent.getAttribute("data-id");
     const taskGroup = article.getAttribute("data-id");
     const item = listItem.getAttribute("data-id");
 
-    if (!taskGroup || !item) return;
-    taskModifier(taskGroup, item, "done");
-    const tasks = taskGetter();
+    if (!taskGroup || !item || !projectId) return;
+    taskModifier(projectId, taskGroup, item, "done");
+    const currentProjectObj = projectsGetter().find(
+      (val) => val.id === projectId,
+    );
+    if (!currentProjectObj) return;
+    const tasks = currentProjectObj.subtasks;
+
     listItem.classList.toggle("completed");
 
-    const currentTask = tasks.find((a) => a.subTaskId === taskGroup);
-    if (currentTask?.taskData.every((data) => data.flags?.includes("done"))) {
-      const currentProject = getCurrentProject();
-      if (!currentProject) return;
-      const taskRenderData = taskBuilder(activities, tasks, currentProject);
+    const currentTask = tasks.find((a) => a.id === taskGroup);
+    if (currentTask?.tasks.every((data) => data.flags?.includes("done"))) {
+      const taskRenderData = taskBuilder(currentProjectObj);
       if (!taskRenderData) return;
       renderElement(parent, taskRenderData);
     }
