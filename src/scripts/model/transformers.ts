@@ -18,6 +18,7 @@ export const taskBuilder = (isBuildingProject: Project) => {
           tag: "li",
           content: data.detail,
           "data-id": data.id,
+          class: data.flags?.includes("done") ? "completed" : "",
         };
       });
 
