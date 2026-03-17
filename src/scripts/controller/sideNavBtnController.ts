@@ -1,4 +1,4 @@
-import { mainContainer, renderView, viewMap } from "./renderUtility";
+import { renderView, viewMap } from "../view/renderUtilities";
 
 //select the app header nav buttons
 const headerButtons =
@@ -28,14 +28,4 @@ headerButtons.forEach((button) => {
       renderView(view);
     }
   });
-});
-
-//add click event to project detail back button
-document.addEventListener("click", (e) => {
-  const target = e.target as HTMLElement;
-  const btn = target.closest("#backBtn");
-  if (btn) {
-    mainContainer?.classList.remove("show-detail");
-    btn.setAttribute("disabled", "disabled");
-  }
 });

@@ -1,6 +1,7 @@
-import Page, { type PageData } from "../view/Page";
+import Page, { type PageData } from "./Page";
 import { getHomeData } from "../model/homeView";
 
+//file containing functions that extends the use of the render engine
 export const mainContainer = document.getElementById("main");
 
 //map that contains all app view state

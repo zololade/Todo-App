@@ -1,8 +1,13 @@
 import "./styles/index.css";
-import "./scripts/controller/renderUtility";
-import "./scripts/controller/buttonController";
-import "./scripts/controller/projectController";
-import "./scripts/controller/taskListHandler";
+import { mainContainer, renderView } from "./scripts/view/renderUtilities";
+import "./scripts/controller/eventDelegationController";
+import "./scripts/controller/sideNavBtnController";
+
+// initial app load render
+window.addEventListener("load", () => {
+  if (!mainContainer) return;
+  renderView("home");
+});
 
 window.addEventListener("load", () => {
   document.body.style.opacity = "1";

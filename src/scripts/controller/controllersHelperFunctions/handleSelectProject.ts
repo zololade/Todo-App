@@ -1,25 +1,14 @@
-import {
-  projectsDataGetter as projectsGetter,
-  type Project,
-} from "../store/store";
-import { projectTransformer } from "../model/transformers";
-import { mainContainer, renderElement, renderView } from "./renderUtility";
+import { projectsDataGetter as projectsGetter } from "../../store/store";
+import { projectTransformer } from "../../model/transformers";
+import { mainContainer, renderElement } from "../../view/renderUtilities";
 
-let currentProject: Project | null = null;
-
-//initial app load render
-window.addEventListener("load", () => {
-  if (!mainContainer) return;
-  renderView("home");
-});
-
-// Event Delegation for Activity Selection
-mainContainer?.addEventListener("click", (e) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export function handleSelectProject(match: Element, _event: PointerEvent) {
+  // Event Delegation for Project list Selection
   if (!mainContainer) return;
 
   //select an item from the list of available project list
-  const target = e.target as HTMLElement;
-  const listItem = target.closest("li[data-id]");
+  const listItem = match;
 
   if (listItem) {
     //grab project id
@@ -27,7 +16,6 @@ mainContainer?.addEventListener("click", (e) => {
     const project = projectsGetter().find((a) => a.id === projectId);
 
     if (project) {
-      currentProject = project;
       // 1. Update Active State in UI
       mainContainer
         .querySelectorAll("#project-list li")
@@ -46,8 +34,4 @@ mainContainer?.addEventListener("click", (e) => {
       }
     }
   }
-});
-
-export const getCurrentProject = () => {
-  return currentProject;
-};
+}
