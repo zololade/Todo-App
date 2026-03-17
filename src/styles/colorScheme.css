@@ -21,6 +21,7 @@
   --radius-md: 12px;
   --thumb: #372f41;
   --para: clamp(0.5rem, 0.5rem + 1vw, 1rem);
+  --checkMark-size: clamp(0.5rem, 0.5rem + 1vw, 1rem);
   --activities-span: clamp(0.4rem, 0.5rem + 1vw, 0.8rem);
   --activities-span-h2: clamp(0.4rem, 0.6rem + 1vw, 0.95rem);
   --h2: clamp(1rem, 1vw + 1rem, 2rem);

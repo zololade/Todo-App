@@ -12,7 +12,10 @@ mainContainer?.addEventListener("click", (e) => {
   const target = e.target as HTMLElement;
   const parent = target.closest(".subTask") as HTMLElement;
   const article = target.closest(".subTask>article") as HTMLElement;
-  const listItem = target.closest(".subTask>article>ul> li") as HTMLElement;
+  const listItem = target.closest(".subTask>article>ul>li") as HTMLElement;
+  // const iconItem = target.closest(".markIcon") as HTMLElement;
+
+  // console.log(iconItem);
   if (article && listItem && parent) {
     //grab project id
     const projectId = parent.getAttribute("data-id");
@@ -28,6 +31,12 @@ mainContainer?.addEventListener("click", (e) => {
     const tasks = currentProjectObj.subtasks;
 
     listItem.classList.toggle("completed");
+    const markIcon = listItem.querySelector(".markIcon");
+    if (markIcon) {
+      markIcon.textContent = listItem.classList.contains("completed")
+        ? "✓"
+        : ".";
+    }
 
     const currentTask = tasks.find((a) => a.id === taskGroup);
     if (currentTask?.tasks.every((data) => data.flags?.includes("done"))) {

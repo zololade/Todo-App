@@ -16,9 +16,19 @@ export const taskBuilder = (isBuildingProject: Project) => {
       const processedTasks = Tasks.map((data) => {
         return {
           tag: "li",
-          content: data.detail,
           "data-id": data.id,
           class: data.flags?.includes("done") ? "completed" : "",
+          content: [
+            {
+              tag: "div",
+              class: "markIcon",
+              content: data.flags?.includes("done") ? "✓" : ".",
+            },
+            {
+              tag: "p",
+              content: data.detail,
+            },
+          ],
         };
       });
 
@@ -79,7 +89,14 @@ function projectListGetter(): PageData {
     tag: "section",
     id: "project-list",
     content: [
-      { tag: "h2", content: "Your Projects" },
+      {
+        tag: "header",
+        content: [
+          { tag: "h2", content: "Your Projects" },
+          { tag: "button", content: "⌕" },
+          { tag: "button", content: "+" },
+        ],
+      },
       {
         tag: "ul",
         content: [...projectsGetter()]
