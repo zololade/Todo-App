@@ -27,7 +27,7 @@
   align-items: center;
   justify-content: center;
   font-weight: 600;
-  font-size: 0.8rem;
+  font-size: var(--para);
 }
 
 .project-detail-nav button:hover {
