@@ -8,7 +8,7 @@
    ============================================ */
 #main {
   flex: 1;
-  margin-left: 60px;
+  margin-left: 3.75rem;
   /* Offset for slim nav */
   display: grid !important;
   /* Force override */

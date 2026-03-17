@@ -8,7 +8,7 @@
 }
 
 #project-detail > #projectInfo {
-  padding: 4rem 2rem calc(80px + 2rem) 2rem;
+  padding: 4rem 2rem calc(5rem + 2rem) 2rem;
   scrollbar-width: thin;
   scrollbar-gutter: 0.5rem;
   scrollbar-color: var(--thumb) var(--bg-app);
