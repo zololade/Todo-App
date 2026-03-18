@@ -109,4 +109,60 @@ function projectListGetter(): PageData {
   };
 }
 
-export { projectTransformer, projectLI, projectListGetter };
+function addProjectFormBuilder() {
+  return [
+    {
+      tag: "input",
+      content: "",
+      placeholder: "Title field...",
+      class: "mockH2",
+    },
+    {
+      tag: "textarea",
+      rows: "1",
+      content: "",
+      class: "mockP",
+      placeholder: "Overview field of your current project...",
+    },
+    {
+      class: "subTask",
+      tag: "div",
+      content: [
+        {
+          tag: "article",
+          content: [
+            {
+              tag: "input",
+              placeholder: "Subtask field heading...",
+              class: "mockH3",
+            },
+            {
+              tag: "ul",
+              content: [
+                {
+                  tag: "li",
+                  content: [
+                    { tag: "div", class: "markIcon", content: "." },
+                    {
+                      tag: "textarea",
+                      rows: "1",
+                      placeholder: "Task field details of current subtask... ",
+                      class: "mockP",
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ];
+}
+
+export {
+  projectTransformer,
+  projectLI,
+  projectListGetter,
+  addProjectFormBuilder,
+};

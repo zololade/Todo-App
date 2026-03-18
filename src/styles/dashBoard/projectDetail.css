@@ -16,7 +16,8 @@
   height: 100vh;
 }
 
-#project-detail h2 {
+#project-detail h2,
+#project-detail .mockH2 {
   font-size: var(--h2);
   font-weight: 800;
   letter-spacing: -0.04em;
@@ -24,12 +25,42 @@
   line-height: 1.1;
 }
 
-#project-detail p {
+#project-detail p,
+#project-detail .mockP {
   font-size: var(--para);
   line-height: 1.6;
   color: var(--text-secondary);
   margin-bottom: 1.2rem;
 }
+
+/* --- Input view --- */
+#projectInfo input,
+#projectInfo textarea {
+  display: block;
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-size: inherit;
+  font-family: inherit;
+  border-bottom: 1px solid transparent;
+}
+#projectInfo input:focus,
+#projectInfo textarea:focus {
+  outline: none;
+  border-bottom: 1px solid var(--accent);
+}
+#projectInfo input:hover,
+#projectInfo textarea:hover {
+  background: var(--accent-soft);
+}
+
+#projectInfo textarea {
+  resize: none;
+  overflow: hidden;
+  height: auto;
+}
+
 /* --- Animation --- */
 #projectInfo > * {
   animation: slideUp 0.5s ease-out;

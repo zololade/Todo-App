@@ -5,7 +5,8 @@
     & > * {
       animation: slideUp 1s ease-out;
     }
-    & h3 {
+    & h3,
+    & .mockH3 {
       font-size: var(--h3);
       color: var(--text-primary);
       border-bottom: 1px solid var(--border);
@@ -20,9 +21,10 @@
         font-size: var(--para);
         color: var(--text-secondary);
         display: flex;
-        align-items: baseline;
+        align-items: first baseline;
 
-        & p {
+        & p,
+        & .mockP {
           margin-bottom: 0;
         }
 
