@@ -94,7 +94,7 @@ function projectListGetter(): PageData {
         content: [
           { tag: "h2", content: "Your Projects" },
           { tag: "button", content: "⌕" },
-          { tag: "button", content: "+" },
+          { tag: "button", content: "+", id: "addProjectBtn" },
         ],
       },
       {

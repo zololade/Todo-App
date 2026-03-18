@@ -2,11 +2,13 @@ import { handleBackBtn } from "./controllersHelperFunctions/handleBackBtn";
 import { handleSelectProject } from "./controllersHelperFunctions/handleSelectProject";
 import { handleTaskClick } from "./controllersHelperFunctions/handleTaskClick";
 import { mainContainer } from "../view/renderUtilities";
+import { handleAddProject } from "./addProjectController";
 
 const handlers = [
   { selector: "#projectInfo .subTask>article>ul>li", handler: handleTaskClick },
   { selector: "#backBtn", handler: handleBackBtn },
   { selector: "#project-list li[data-id]", handler: handleSelectProject },
+  { selector: "#addProjectBtn", handler: handleAddProject },
 ];
 
 mainContainer?.addEventListener("click", (e) => {

@@ -21,7 +21,8 @@ export function handleSelectProject(match: Element, _event: PointerEvent) {
         .querySelectorAll("#project-list li")
         .forEach((el) => el.classList.remove("active"));
       listItem.classList.add("active");
-      if (matchMedia("(max-width:1100px)")) {
+
+      if (window.matchMedia("(width <= 1100px)").matches) {
         mainContainer.classList.toggle("show-detail");
         document.querySelector("#backBtn")?.removeAttribute("disabled");
       }
@@ -35,3 +36,14 @@ export function handleSelectProject(match: Element, _event: PointerEvent) {
     }
   }
 }
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+addEventListener("resize", (_event) => {
+  //related disable back ui button
+  if (window.matchMedia("(width >= 1100px)").matches) {
+    document.querySelector("#backBtn")?.setAttribute("disabled", "disabled");
+  }
+  if (window.matchMedia("(width <= 1100px)").matches) {
+    document.querySelector("#backBtn")?.removeAttribute("disabled");
+  }
+});
