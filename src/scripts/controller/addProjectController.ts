@@ -47,31 +47,29 @@ export function handleMockH3Input(match: HTMLElement, e: Event) {
       `subTask-${value + 1}`,
       `article-${value + 1}`,
     );
-  } else if (subTaskMap.get(currentSubtask.id) === "" && value) {
-    console.log("hello");
-    for (let i = subtaskParent.childElementCount; i > value; i--) {
-      console.log(subtaskParent.childElementCount);
-      const child = document.querySelector(`#article-${i}`);
-      subTaskMap.delete(`subTask-${i}`);
-      if (child) subtaskParent.removeChild(child);
-    }
-  }
-
-  for (const entries of subTaskMap) {
-    console.log(entries);
   }
 }
 
 export function handleSubTaskMockPInput(match: HTMLElement, e: Event) {
   const target = e.target as HTMLElement;
   const parentSubtask = target.closest("article");
+  const container = target.closest("ul");
   const taskId = target.closest("li[id]");
   match.style.height = `${match.scrollHeight}px`;
 
-  if (!parentSubtask) return;
+  if (!parentSubtask || !container) return;
   const currentTask = match as HTMLInputElement;
   if (!currentTask || !taskId) return;
   taskMap.set(`${parentSubtask.id} ${taskId.id}`, currentTask.value);
+  const value = extractNumber(taskId.id);
+
+  if (
+    taskMap.get(`${parentSubtask.id} ${taskId.id}`) !== "" &&
+    value &&
+    container.childElementCount === value
+  ) {
+    buildNextTask(container, `task-${value + 1}`);
+  }
 }
 
 //################
@@ -114,7 +112,6 @@ function buildNextSubtask(
                   },
                   {
                     tag: "textarea",
-
                     rows: "1",
                     placeholder: "Task field details of current subtask... ",
                     class: "mockP",
@@ -126,6 +123,28 @@ function buildNextSubtask(
         ],
       },
     ]),
+  );
+}
+
+function buildNextTask(host: HTMLElement, taskId: string) {
+  host.appendChild(
+    Page.build({
+      tag: "li",
+      id: taskId,
+      content: [
+        {
+          tag: "div",
+          class: "markIcon",
+          content: ".",
+        },
+        {
+          tag: "textarea",
+          rows: "1",
+          placeholder: "Task field details of current subtask... ",
+          class: "mockP",
+        },
+      ],
+    }),
   );
 }
 
