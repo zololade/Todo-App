@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { addProjectFormBuilder, generateIdentity } from "../model/transformers";
+import { addProjectFormBuilder } from "../model/transformers";
 import Page from "../view/Page";
 import { mainContainer, renderElement } from "../view/renderUtilities";
 
@@ -87,34 +87,34 @@ function buildNextSubtask(
     Page.build([
       {
         tag: "article",
-        uuid: generateIdentity(),
+
         id: articleId,
         content: [
           {
             tag: "input",
-            uuid: generateIdentity(),
+
             placeholder: "Subtask field heading...",
             class: "mockH3",
             id: subTaskId,
           },
           {
             tag: "ul",
-            uuid: generateIdentity(),
+
             content: [
               {
                 tag: "li",
-                uuid: generateIdentity(),
+
                 id: taskId,
                 content: [
                   {
                     tag: "div",
-                    uuid: generateIdentity(),
+
                     class: "markIcon",
                     content: ".",
                   },
                   {
                     tag: "textarea",
-                    uuid: generateIdentity(),
+
                     rows: "1",
                     placeholder: "Task field details of current subtask... ",
                     class: "mockP",
