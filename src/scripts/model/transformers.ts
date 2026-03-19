@@ -130,17 +130,20 @@ function addProjectFormBuilder() {
       content: [
         {
           tag: "article",
+          id: "article-1",
           content: [
             {
               tag: "input",
               placeholder: "Subtask field heading...",
               class: "mockH3",
+              id: "subTask-1",
             },
             {
               tag: "ul",
               content: [
                 {
                   tag: "li",
+                  id: "task-1",
                   content: [
                     { tag: "div", class: "markIcon", content: "." },
                     {

@@ -5,6 +5,8 @@ import { mainContainer } from "../view/renderUtilities";
 import {
   handleAddProject,
   handleMockH3Focus,
+  handleMockH3Input,
+  handleSubTaskMockPInput,
   handleTextArea,
 } from "./addProjectController";
 
@@ -14,8 +16,14 @@ const clickHandlers = [
   { selector: "#project-list li[data-id]", handler: handleSelectProject },
   { selector: "#addProjectBtn", handler: handleAddProject },
 ];
+
 const inputHandlers = [
-  { selector: "#projectInfo textarea", handler: handleTextArea },
+  {
+    selector: ".subTask>article>ul>li>textarea",
+    handler: handleSubTaskMockPInput,
+  },
+  { selector: "#projectInfo>.mockP", handler: handleTextArea },
+  { selector: "#projectInfo .subTask .mockH3", handler: handleMockH3Input },
 ];
 
 const focusHandlers = [
