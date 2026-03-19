@@ -4,7 +4,6 @@ import { handleTaskClick } from "./controllersHelperFunctions/handleTaskClick";
 import { mainContainer } from "../view/renderUtilities";
 import {
   handleAddProject,
-  handleMockH3Focus,
   handleMockH3Input,
   handleSubTaskMockPInput,
   handleTextArea,
@@ -26,10 +25,6 @@ const inputHandlers = [
   { selector: "#projectInfo .subTask .mockH3", handler: handleMockH3Input },
 ];
 
-const focusHandlers = [
-  { selector: "#projectInfo .mockH3", handler: handleMockH3Focus },
-];
-
 mainContainer?.addEventListener("click", (e) => {
   const target = e.target as HTMLElement;
   for (const { selector, handler } of clickHandlers) {
@@ -44,17 +39,6 @@ mainContainer?.addEventListener("click", (e) => {
 mainContainer?.addEventListener("input", (e) => {
   const target = e.target as HTMLElement;
   for (const { selector, handler } of inputHandlers) {
-    const match = target.closest(selector) as HTMLElement;
-    if (match) {
-      handler(match, e);
-      break;
-    }
-  }
-});
-
-mainContainer?.addEventListener("focusout", (e) => {
-  const target = e.target as HTMLElement;
-  for (const { selector, handler } of focusHandlers) {
     const match = target.closest(selector) as HTMLElement;
     if (match) {
       handler(match, e);
