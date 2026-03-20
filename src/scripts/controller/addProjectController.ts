@@ -25,9 +25,6 @@ export function handleAddProject(_match: Element, _e: PointerEvent) {
     const detailData = addProjectFormBuilder();
     renderElement(detailPanel, detailData);
   }
-
-  taskMap.set("article-1 task-1", "");
-  subTaskMap.set("subTask-1", "");
 }
 
 export function handleTextArea(match: HTMLElement, _e: Event) {
@@ -88,7 +85,11 @@ export function handleSaveBtn(_match: Element, _e: Event) {
     "#inputPara",
   ) as HTMLInputElement;
   const UL = document.querySelector("#project-list>ul") as HTMLElement;
-
+  if (!projectTitleHost.value.trim()) {
+    projectTitleHost.placeholder = "Project needs a title...";
+    projectTitleHost.focus();
+    return;
+  }
   const accumulatorObject: { [key: string]: { id: string; detail: string }[] } =
     {};
 
