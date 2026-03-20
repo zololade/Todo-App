@@ -13,27 +13,8 @@ export function handleSelectProject(match: Element, _event: PointerEvent) {
   if (listItem) {
     //grab project id
     const projectId = listItem.getAttribute("data-id");
-    const project = projectsGetter().find((a) => a.id === projectId);
-
-    if (project) {
-      // 1. Update Active State in UI
-      mainContainer
-        .querySelectorAll("#project-list li")
-        .forEach((el) => el.classList.remove("active"));
-      listItem.classList.add("active");
-
-      if (window.matchMedia("(width <= 1100px)").matches) {
-        mainContainer.classList.toggle("show-detail");
-        document.querySelector("#backBtn")?.removeAttribute("disabled");
-      }
-
-      // 2. Render project Detail Panel
-      const detailPanel = document.getElementById("projectInfo");
-      if (detailPanel) {
-        const detailData = projectTransformer(project);
-        renderElement(detailPanel, detailData);
-      }
-    }
+    if (!projectId) return;
+    findAndViewProject(projectId);
   }
 }
 
@@ -47,3 +28,29 @@ addEventListener("resize", (_event) => {
     document.querySelector("#backBtn")?.removeAttribute("disabled");
   }
 });
+
+export default function findAndViewProject(identity: string) {
+  const project = projectsGetter().find((a) => a.id === identity);
+
+  if (project && mainContainer) {
+    // 1. Update Active State in UI
+    mainContainer
+      .querySelectorAll("#project-list li")
+      .forEach((el) => el.classList.remove("active"));
+    const getActiveItem = document.querySelector(`li[data-id="${identity}"]`);
+
+    if (getActiveItem) getActiveItem.classList.add("active");
+
+    if (window.matchMedia("(width <= 1100px)").matches) {
+      mainContainer.classList.toggle("show-detail");
+      document.querySelector("#backBtn")?.removeAttribute("disabled");
+    }
+
+    // 2. Render project Detail Panel
+    const detailPanel = document.getElementById("projectInfo");
+    if (detailPanel) {
+      const detailData = projectTransformer(project);
+      renderElement(detailPanel, detailData);
+    }
+  }
+}

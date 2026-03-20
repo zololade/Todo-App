@@ -4,11 +4,15 @@ import {
   addProjectFormBuilder,
   buildNextSubtask,
   buildNextTask,
+  getProjectList,
 } from "../model/transformers";
 import { mainContainer, renderElement } from "../view/renderUtilities";
+import { addProject, type InputData } from "../store/store";
+import findAndViewProject from "./controllersHelperFunctions/handleSelectProject";
+import Page from "../view/Page";
 
-const taskMap = new Map();
-const subTaskMap = new Map();
+const taskMap: Map<string, string> = new Map();
+const subTaskMap: Map<string, string> = new Map();
 
 export function handleAddProject(_match: Element, _e: PointerEvent) {
   if (window.matchMedia("(width <= 1100px)").matches) {
@@ -47,7 +51,7 @@ export function handleMockH3Input(match: HTMLElement, e: Event) {
   ) {
     buildNextSubtask(
       subtaskParent,
-      `task-${value + 1}`,
+      `task-1`,
       `subTask-${value + 1}`,
       `article-${value + 1}`,
     );
@@ -74,6 +78,66 @@ export function handleSubTaskMockPInput(match: HTMLElement, e: Event) {
   ) {
     buildNextTask(container, `task-${value + 1}`);
   }
+}
+
+export function handleSaveBtn(_match: Element, _e: Event) {
+  const projectTitleHost = document.querySelector(
+    ".mockH2",
+  ) as HTMLInputElement;
+  const projectParaHost = document.querySelector(
+    "#inputPara",
+  ) as HTMLInputElement;
+  const UL = document.querySelector("#project-list>ul") as HTMLElement;
+
+  const accumulatorObject: { [key: string]: { id: string; detail: string }[] } =
+    {};
+
+  for (const [key, value] of taskMap.entries()) {
+    const subtaskKeyValue = key.split(" ")[0];
+    const taskKeyValue = key.split(" ")[1];
+    if (!subtaskKeyValue || !taskKeyValue) return;
+    accumulatorObject[subtaskKeyValue] = [
+      ...(accumulatorObject[subtaskKeyValue] || []),
+      {
+        id: taskKeyValue,
+        detail: value,
+      },
+    ];
+  }
+
+  let subTask: InputData["subtasks"] = [];
+
+  subTaskMap.forEach((value, key) => {
+    const num = extractNumber(key);
+    if (!num) return;
+    const taskArray = accumulatorObject[`article-${num}`];
+    if (value === "" || !subTask || !taskArray) return;
+
+    subTask = [
+      ...subTask,
+      {
+        title: value,
+        tasks: [
+          ...taskArray.map((data) => data.detail).filter((data) => data !== ""),
+        ],
+      },
+    ];
+  });
+
+  const transformUserInput: InputData = {
+    title: projectTitleHost.value,
+    overview: projectParaHost.value,
+    subtasks: subTask,
+  };
+
+  findAndViewProject(addProject(transformUserInput));
+  const listData = getProjectList();
+  const fragment = Page.build(listData);
+  Page.pureRender(UL, fragment);
+  // renderElement(UL, getProjectList()); // had to comment this out of multiple view transition clashing
+  navStateSetter("write");
+  taskMap.clear();
+  subTaskMap.clear();
 }
 
 //################

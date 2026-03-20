@@ -124,14 +124,18 @@ function projectListGetter(): PageData {
       {
         tag: "ul",
 
-        content: [...projectsGetter()]
-          .sort((itemA, itemB) => {
-            return itemA.createdAt - itemB.createdAt;
-          })
-          .map(projectLI),
+        content: getProjectList(),
       },
     ],
   };
+}
+
+export function getProjectList() {
+  return [...projectsGetter()]
+    .sort((itemA, itemB) => {
+      return itemA.createdAt - itemB.createdAt;
+    })
+    .map(projectLI);
 }
 
 function addProjectFormBuilder() {
@@ -145,7 +149,7 @@ function addProjectFormBuilder() {
     },
     {
       tag: "textarea",
-
+      id: "inputPara",
       rows: "1",
       content: "",
       class: "mockP",

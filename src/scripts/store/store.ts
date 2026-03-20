@@ -140,7 +140,7 @@ export function taskModifier(
 
 export function addProject(newProjectData: InputData) {
   const newSubtasks = newProjectData.subtasks && newProjectData.subtasks;
-
+  const projId = crypto.randomUUID();
   const isBuildingSubtask =
     newSubtasks &&
     newSubtasks.map((data) => {
@@ -161,7 +161,7 @@ export function addProject(newProjectData: InputData) {
     });
 
   const isBuildingProject: Project = {
-    id: crypto.randomUUID(),
+    id: projId,
     title: newProjectData.title,
     overview: newProjectData.overview,
     flags: null,
@@ -170,6 +170,7 @@ export function addProject(newProjectData: InputData) {
   };
 
   projectsDataSetter([...projectsDataGetter(), isBuildingProject]);
+  return projId;
 }
 
 //utility
