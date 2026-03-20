@@ -2,7 +2,8 @@ import {
   projectsDataGetter as projectsGetter,
   type Project,
 } from "../store/store";
-import { type PageData } from "../view/Page";
+import Page, { type PageData } from "../view/Page";
+import { navStateSetter } from "./projectDetailNav";
 
 export const taskBuilder = (isBuildingProject: Project) => {
   const currentSubtask = isBuildingProject.subtasks;
@@ -58,6 +59,8 @@ export const taskBuilder = (isBuildingProject: Project) => {
 };
 
 const projectTransformer = (projectItem: Project | undefined): PageData => {
+  navStateSetter("write");
+
   if (!projectItem) return { tag: "p", content: "project not found" };
   const builtTask = taskBuilder(projectItem);
   return [
@@ -198,7 +201,82 @@ function addProjectFormBuilder() {
   ];
 }
 
+function buildNextSubtask(
+  host: HTMLElement,
+  taskId: string,
+  subTaskId: string,
+  articleId: string,
+) {
+  host.appendChild(
+    Page.build([
+      {
+        tag: "article",
+
+        id: articleId,
+        content: [
+          {
+            tag: "input",
+
+            placeholder: "Subtask field heading...",
+            class: "mockH3",
+            id: subTaskId,
+          },
+          {
+            tag: "ul",
+
+            content: [
+              {
+                tag: "li",
+
+                id: taskId,
+                content: [
+                  {
+                    tag: "div",
+
+                    class: "markIcon",
+                    content: ".",
+                  },
+                  {
+                    tag: "textarea",
+                    rows: "1",
+                    placeholder: "Task field details of current subtask... ",
+                    class: "mockP",
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ]),
+  );
+}
+
+function buildNextTask(host: HTMLElement, taskId: string) {
+  host.appendChild(
+    Page.build({
+      tag: "li",
+      id: taskId,
+      content: [
+        {
+          tag: "div",
+          class: "markIcon",
+          content: ".",
+        },
+        {
+          tag: "textarea",
+          rows: "1",
+          placeholder: "Task field details of current subtask... ",
+          class: "mockP",
+        },
+      ],
+    }),
+  );
+}
+
 export {
+  buildNextSubtask,
+  buildNextTask,
   projectTransformer,
   projectLI,
   projectListGetter,

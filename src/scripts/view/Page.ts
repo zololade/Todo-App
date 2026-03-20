@@ -16,19 +16,23 @@ export default class Page {
 
   static build(
     incomingObject: PageData,
-  ): HTMLElement | DocumentFragment | Text {
+  ): HTMLElement | DocumentFragment | SVGSVGElement | SVGPathElement | Text {
     let tag: string;
     let content: string | PageData[] | undefined;
-    let el: HTMLElement | DocumentFragment;
+    let el: HTMLElement | DocumentFragment | SVGSVGElement | SVGPathElement;
     let att: Record<string, unknown>;
 
     if (Page.isObject(incomingObject)) {
       ({ tag, content, ...att } = incomingObject);
-      el = document.createElement(tag);
+      el =
+        tag === "svg" || tag === "path"
+          ? document.createElementNS("http://www.w3.org/2000/svg", tag)
+          : document.createElement(tag);
 
       Object.entries(att).forEach(([key, value]) => {
+        if (key === "xmlns") return;
         const lookupKey = key === "class" ? "className" : key;
-        if (lookupKey in el) {
+        if (lookupKey in el && !(el instanceof SVGElement)) {
           (el as unknown as Record<string, unknown>)[lookupKey] = value;
         } else {
           (el as HTMLElement).setAttribute(key, String(value));
@@ -70,7 +74,12 @@ export default class Page {
 
   static pureRender(
     host: HTMLElement,
-    elem: HTMLElement | DocumentFragment | Text,
+    elem:
+      | HTMLElement
+      | DocumentFragment
+      | Text
+      | SVGSVGElement
+      | SVGPathElement,
   ) {
     host.innerHTML = "";
     const fragment = document.createDocumentFragment();

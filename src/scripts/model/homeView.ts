@@ -1,4 +1,5 @@
 import type { PageData } from "../view/Page";
+import { navDataBuilder } from "./projectDetailNav";
 import { projectListGetter } from "./transformers";
 
 // The welcome message shown in Section 1 before anything is selected
@@ -30,15 +31,7 @@ export const projectDetail: PageData = {
       tag: "nav",
 
       class: "project-detail-nav",
-      content: [
-        {
-          tag: "button",
-
-          content: "Back",
-          id: "backBtn",
-          disabled: "disabled",
-        },
-      ],
+      content: navDataBuilder("default"),
     },
     welcomeDetail,
   ], // Section 1 starts with welcome message

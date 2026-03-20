@@ -19,7 +19,6 @@
   padding: 0.5rem 1rem;
   border-radius: var(--radius-md);
   border: 1px solid transparent;
-  background: var(--bg-card);
   cursor: pointer;
   color: var(--text-primary);
   transition: all 0.2s;
@@ -28,6 +27,12 @@
   justify-content: center;
   font-weight: 600;
   font-size: var(--para);
+
+  & svg {
+    color: var(--text-primary);
+    width: calc(var(--para) + 0.45rem);
+    height: calc(var(--para) + 0.45rem);
+  }
 }
 
 .project-detail-nav button:hover {
@@ -36,6 +41,9 @@
 
 .project-detail-nav button:disabled {
   color: var(--text-secondary);
+  & svg {
+    color: var(--text-secondary);
+  }
 }
 
 .project-detail-nav button:hover:disabled {
