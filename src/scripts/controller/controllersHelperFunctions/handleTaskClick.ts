@@ -30,7 +30,7 @@ export function handleTaskClick(_match: Element, event: PointerEvent) {
       (val) => val.id === projectId,
     );
 
-    //grab updated subtask
+    //grab updated subTask
     if (!currentProjectObj) return;
     const subTasks = currentProjectObj.subtasks;
 

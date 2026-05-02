@@ -135,7 +135,7 @@ export function handleSaveBtn(_match: Element, _e: Event) {
   const listData = getProjectList();
   const fragment = Page.build(listData);
   Page.pureRender(UL, fragment);
-  // renderElement(UL, getProjectList()); // had to comment this out of multiple view transition clashing
+  // had to comment this out, because of multiple view transition clashing
   navStateSetter("write");
   taskMap.clear();
   subTaskMap.clear();
