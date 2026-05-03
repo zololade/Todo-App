@@ -133,7 +133,7 @@ function projectListGetter(): PageData {
 export function getProjectList() {
   return [...projectsGetter()]
     .sort((itemA, itemB) => {
-      return itemA.createdAt - itemB.createdAt;
+      return itemB.createdAt - itemA.createdAt;
     })
     .map(projectLI);
 }
