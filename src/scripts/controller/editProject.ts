@@ -3,6 +3,7 @@ import { addProjectFormBuilder } from "../model/transformers";
 import { getProject } from "../store/store";
 import { mainContainer, renderElement } from "../view/renderUtilities";
 import { subTaskMap, taskMap } from "./addProjectController";
+import { getActiveProjectId } from "./controllersHelperFunctions/handleSelectProject";
 
 interface SubTask {
   id: string;
@@ -18,8 +19,7 @@ interface SubTask {
 function handleEditBtn(_match: Element, _e: PointerEvent) {
   taskMap.clear();
   subTaskMap.clear();
-  const active = mainContainer?.querySelector("li.active") as HTMLElement;
-  const currProjectId = active.dataset.id;
+  const currProjectId = getActiveProjectId();
   if (!currProjectId) return;
 
   const project = getProject(currProjectId);
@@ -36,8 +36,10 @@ function handleEditBtn(_match: Element, _e: PointerEvent) {
 
   // const UL = document.querySelector("#project-list>ul") as HTMLElement;
   renderElement(detailPanel, detailData, false, () => {
-    const title = document.querySelector(".mockH2") as HTMLInputElement | null;
-    const para = document.querySelector(
+    const title = mainContainer?.querySelector(
+      ".mockH2",
+    ) as HTMLInputElement | null;
+    const para = mainContainer?.querySelector(
       "#inputPara",
     ) as HTMLInputElement | null;
 
