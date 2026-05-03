@@ -2,6 +2,16 @@ import { projectsDataGetter as projectsGetter } from "../../store/store";
 import { projectTransformer } from "../../model/transformers";
 import { mainContainer, renderElement } from "../../view/renderUtilities";
 
+let currentActiveProjectId: string | null = null;
+
+export function setActiveProjectId(id: string | null) {
+  currentActiveProjectId = id;
+}
+
+export function getActiveProjectId() {
+  return currentActiveProjectId;
+}
+
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function handleSelectProject(match: Element, _event: PointerEvent) {
   // Event Delegation for Project list Selection
@@ -33,6 +43,7 @@ export default function findAndViewProject(
   identity: string,
   afterRender?: () => void,
 ) {
+  setActiveProjectId(identity);
   const project = projectsGetter().find((a) => a.id === identity);
 
   if (project && mainContainer) {

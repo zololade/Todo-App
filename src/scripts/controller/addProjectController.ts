@@ -8,7 +8,9 @@ import {
 } from "../model/transformers";
 import { mainContainer, renderElement } from "../view/renderUtilities";
 import { addProject, type InputData } from "../store/store";
-import findAndViewProject from "./controllersHelperFunctions/handleSelectProject";
+import findAndViewProject, {
+  getActiveProjectId,
+} from "./controllersHelperFunctions/handleSelectProject";
 // import Page from "../view/Page";
 
 const taskMap: Map<string, string> = new Map();
@@ -133,8 +135,18 @@ export function handleSaveBtn(_match: Element, _e: Event) {
   };
 
   function renderNext() {
+    const activeId = getActiveProjectId();
     const listData = getProjectList();
-    renderElement(UL, listData);
+
+    function updateList() {
+      if (!mainContainer) return;
+      const getActiveItem = mainContainer.querySelector(
+        `li[data-id="${activeId}"]`,
+      );
+      getActiveItem?.classList.add("active");
+    }
+
+    renderElement(UL, listData, false, updateList);
     navStateSetter("write");
     taskMap.clear();
     subTaskMap.clear();
