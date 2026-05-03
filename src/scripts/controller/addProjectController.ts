@@ -9,7 +9,7 @@ import {
 import { mainContainer, renderElement } from "../view/renderUtilities";
 import { addProject, type InputData } from "../store/store";
 import findAndViewProject from "./controllersHelperFunctions/handleSelectProject";
-import Page from "../view/Page";
+// import Page from "../view/Page";
 
 const taskMap: Map<string, string> = new Map();
 const subTaskMap: Map<string, string> = new Map();
@@ -66,6 +66,7 @@ export function handleSubTaskMockPInput(match: HTMLElement, e: Event) {
   const currentTask = match as HTMLInputElement;
   if (!currentTask || !taskId) return;
   taskMap.set(`${parentSubtask.id} ${taskId.id}`, currentTask.value);
+
   const value = extractNumber(taskId.id);
 
   if (
@@ -96,7 +97,7 @@ export function handleSaveBtn(_match: Element, _e: Event) {
   for (const [key, value] of taskMap.entries()) {
     const subtaskKeyValue = key.split(" ")[0];
     const taskKeyValue = key.split(" ")[1];
-    if (!subtaskKeyValue || !taskKeyValue) return;
+    if (!subtaskKeyValue || !taskKeyValue) continue;
     accumulatorObject[subtaskKeyValue] = [
       ...(accumulatorObject[subtaskKeyValue] || []),
       {
@@ -131,14 +132,15 @@ export function handleSaveBtn(_match: Element, _e: Event) {
     subtasks: subTask,
   };
 
-  findAndViewProject(addProject(transformUserInput));
-  const listData = getProjectList();
-  const fragment = Page.build(listData);
-  Page.pureRender(UL, fragment);
-  // had to comment this out, because of multiple view transition clashing
-  navStateSetter("write");
-  taskMap.clear();
-  subTaskMap.clear();
+  function renderNext() {
+    const listData = getProjectList();
+    renderElement(UL, listData);
+    navStateSetter("write");
+    taskMap.clear();
+    subTaskMap.clear();
+  }
+
+  findAndViewProject(addProject(transformUserInput), renderNext);
 }
 
 //################
@@ -149,3 +151,5 @@ export function extractNumber(val: string) {
   const processedVal = val.match(/\d+/g)?.join("");
   return processedVal ? +processedVal : null;
 }
+
+export { taskMap, subTaskMap };

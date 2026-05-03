@@ -39,6 +39,7 @@ const storedData =
   typeof localStorage !== "undefined" && localStorage.getItem("todoData");
 
 let workingProjectData = !storedData ? [] : [...JSON.parse(storedData)];
+
 export function projectsDataGetter(): Project[] {
   return workingProjectData;
 }
@@ -50,7 +51,7 @@ function projectsDataSetter(newProjectsData: Project[]) {
   }
 }
 
-function getProject(id: string) {
+export function getProject(id: string) {
   return projectsDataGetter().find((project) => project.id === id);
 }
 

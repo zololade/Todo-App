@@ -29,7 +29,10 @@ addEventListener("resize", (_event) => {
   }
 });
 
-export default function findAndViewProject(identity: string) {
+export default function findAndViewProject(
+  identity: string,
+  afterRender?: () => void,
+) {
   const project = projectsGetter().find((a) => a.id === identity);
 
   if (project && mainContainer) {
@@ -50,7 +53,11 @@ export default function findAndViewProject(identity: string) {
     const detailPanel = document.getElementById("projectInfo");
     if (detailPanel) {
       const detailData = projectTransformer(project);
-      renderElement(detailPanel, detailData);
+      if (afterRender) {
+        renderElement(detailPanel, detailData, false, afterRender);
+      } else {
+        renderElement(detailPanel, detailData);
+      }
     }
   }
 }

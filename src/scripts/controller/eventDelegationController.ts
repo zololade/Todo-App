@@ -9,10 +9,12 @@ import {
   handleSubTaskMockPInput,
   handleTextArea,
 } from "./addProjectController";
+import { handleEditBtn } from "./editProject";
 
 const clickHandlers = [
   { selector: "#projectInfo .subTask>article>ul>li", handler: handleTaskClick },
   { selector: "#backBtn", handler: handleBackBtn },
+  { selector: "#editBtn", handler: handleEditBtn },
   { selector: "#saveBtn", handler: handleSaveBtn },
   { selector: "#project-list li[data-id]", handler: handleSelectProject },
   { selector: "#addProjectBtn", handler: handleAddProject },
