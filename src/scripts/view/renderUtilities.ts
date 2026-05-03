@@ -24,6 +24,7 @@ export function renderElement(
   host: HTMLElement,
   data: PageData,
   skipDiff?: boolean,
+  afterRender?: () => void,
 ) {
   //check if host is available
   if (!host) return;
@@ -37,7 +38,12 @@ export function renderElement(
   };
 
   if (document.startViewTransition) {
-    document.startViewTransition(render);
+    const transition = document.startViewTransition(render);
+    if (afterRender) {
+      transition.finished.then(() => {
+        afterRender();
+      });
+    }
   } else {
     render();
   }
