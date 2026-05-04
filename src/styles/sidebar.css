@@ -8,6 +8,8 @@
   width: 3.75rem;
   /* Slim Icon Bar */
   height: 100vh;
+  height: 100svh; /* Keeps it within the visible screen always */
+  height: 100dvh;
   background: var(--bg-card);
   border-right: 1px solid var(--border);
   display: flex;
