@@ -1,75 +1,94 @@
-# ☕ JIT Coffee (The Odin Project)
+# 📋 TodoFlow — Project & Task Manager
 
-A high-performance, single-page restaurant application built with vanilla JavaScript. This project follows the **Odin Project: Restaurant Page** requirements but utilizes a custom-built **Data-Driven Rendering Engine**.
+A clean, fast, and intuitive project management application built with vanilla TypeScript. Features a modern dashboard layout with project lists, rich task management, and smooth interactions.
 
-## 🚀 The Concept
+![TodoFlow Preview](assets/todo.png) 
 
-**JIT (Just-In-Time) Coffee** is designed for the high-performance professional. The app itself reflects this philosophy: it is fast, lightweight, and built with **SOLID principles** to ensure zero layout shift and maximum maintainability.
+## ✨ Features
 
-## 🛠️ Technical Architecture
+- **Project Management**: Create, view, edit, and organize multiple projects
+- **Nested Tasks**: Subtasks with individual task items
+- **Progress Tracking**: Mark tasks as complete with visual feedback
+- **Responsive Design**: Works beautifully on desktop and mobile
+- **Persistent Storage**: Data saved automatically in browser's localStorage
+- **Smooth UX**: View transitions, dynamic form fields, and clean animations
+- **Keyboard & Click Friendly**: Built with event delegation for great performance
 
-Unlike traditional solutions that hardcode DOM manipulation, this project uses a **Recursive DOM Builder**.
+## 🛠️ Tech Stack
 
-### 1. The Rendering Engine (`Page.js`)
-
-The core of the app is a `Page` class that accepts a "Host" element and a "Data Map." It recursively traverses the data object to build complex nested HTML structures using a single DOM paint via `DocumentFragment`.
-
-### 2. Data-Driven Design
-
-All page content is stored as pure JavaScript objects:
-
-* **Separation of Concerns:** Content lives in `src/pages/`, logic lives in `src/scripts/`.
-* **Scalability:** Adding a new menu item requires zero changes to the logic—simply update the data object.
-
-### 3. Performance & UX
-
-* **Zero Layout Shift:** Image dimensions are pre-reserved in the data maps and controlled via CSS aspect ratios.
-* **Webpack 5:** Assets are bundled and optimized using Asset Modules and Loaders.
-* **Semantic HTML:** Utilizes `<article>`, `<section>`, and `<header>` for SEO and accessibility.
+- **TypeScript**
+- **Webpack 5** (bundling & development server)
+- **Custom Recursive DOM Builder** (zero external UI frameworks)
+- **CSS Variables** + Modern CSS (Flexbox, Grid, Custom Properties)
+- **Vitest** (Testing)
 
 ## 📁 Project Structure
 
 ```text
 src/
-├── assets/           # Optimized images (hero, menu items)
+├── index.html
+├── index.ts
 ├── scripts/
-│   ├── Page.js       # The Rendering Engine (Class-based)
-│   ├── pages/        # Page Data Objects (Home, Menu, Contact, About, Footer)
-│   └── PageRender.js      # Main Router & Event Orchestration
-├── styles/
-│   ├── pages.css     # Clean, layout-driven CSS
-│   └── reset.css     # CSS Reset for consistency
-├── index.html     # Minimalist entry point
-└── index.js       # Main JavaScript entry point (imports styles and PageRender)
+│   ├── store/              # Data layer + persistence
+│   ├── model/              # Business logic & transformers
+│   ├── view/               # Rendering engine + utilities
+│   └── controller/         # Event handlers
+├── styles/                 # Modular CSS
+│   ├── reset.css
+│   ├── colorScheme.css
+│   └── dashBoard/
+└── test/                   # Unit tests
 ```
 
-## 🛠️ Local Setup
+## 🚀 Getting Started
 
-1. **Clone the repo:**
-
+### 1. Clone the repository
 ```bash
-git clone https://github.com/your-username/jit-coffee.git
+git clone https://github.com/zololade/Todo-App.git
+cd Todo-App   # or your project folder name
 ```
 
-1. **Install dependencies:**
-
+### 2. Install dependencies
 ```bash
 npm install
 ```
 
-1. **Run development server:**
-
+### 3. Run development server
 ```bash
 npm start
 ```
+Open [http://localhost:4000](http://localhost:4000)
 
-1. **Build for production:**
-
+### 4. Build for production
 ```bash
 npm run build
 ```
 
-## 📜 Reflections
+## 🎯 How to Use
 
-This project was a deep dive into the power of the DOM API. By choosing to build a generic `builder` function instead of manual string literals, I learned how to handle recursion and mixed-content arrays to create flexible code that mimics the behavior of modern UI frameworks like React or Mithril.js.
-live demo: <https://zololade.github.io/Restaurant-Page/>
+1. **Add a Project** → Click the `+` button in the projects panel
+2. **Fill in details** → Project title, overview, and add subtasks/tasks
+3. **Save** → Click the save icon
+4. **Manage Tasks** → Click any task to mark as complete
+5. **Edit** → Open a project and click the edit button
+6. **Mobile** → Use the back button to toggle between list and detail view
+
+## 🧪 Running Tests
+
+```bash
+npm test
+```
+
+## Roadmap (Future Enhancements)
+
+- [ ] Delete projects and tasks
+- [ ] Search and filter
+- [ ] Due dates & priorities
+- [ ] Dark/Light theme toggle
+- [ ] Drag & drop reordering
+- [ ] Data export/import
+- [ ] Statistics dashboard
+
+## 📄 License
+
+This project was built as part of **The Odin Project** curriculum.
