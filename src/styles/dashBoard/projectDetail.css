@@ -14,7 +14,6 @@
   scrollbar-color: var(--thumb) var(--bg-app);
   overflow-y: scroll;
   height: 100vh;
-  height: 100svh; /* Keeps it within the visible screen always */
   height: 100dvh;
 }
 
