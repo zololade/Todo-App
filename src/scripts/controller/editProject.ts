@@ -58,34 +58,42 @@ function handleEditBtn(_match: Element, _e: PointerEvent) {
     para.value = OVERVIEW;
     let article;
 
-    project.subtasks.forEach((subtask, i) => {
-      article =
-        detailPanel.querySelector(`#article-${i + 1}`) ??
-        (buildNextSubtask(
-          subtaskParent,
-          "task-1",
-          `subTask-${i + 1}`,
-          `article-${i + 1}`,
-        ) as HTMLElement);
+    if (project.subtasks.length > 0) {
+      project.subtasks.forEach((subtask, i) => {
+        article =
+          detailPanel.querySelector(`#article-${i + 1}`) ??
+          (buildNextSubtask(
+            subtaskParent,
+            "task-1",
+            `subTask-${i + 1}`,
+            `article-${i + 1}`,
+          ) as HTMLElement);
 
-      if (!article) return;
-      const heading = article.querySelector(
-        ".mockH3",
-      ) as HTMLInputElement | null;
-      if (heading) heading.value = subtask.title;
+        if (!article) return;
+        const heading = article.querySelector(
+          ".mockH3",
+        ) as HTMLInputElement | null;
+        if (heading) heading.value = subtask.title;
 
-      const UL = article.querySelector("ul");
+        const UL = article.querySelector("ul");
 
-      if (!UL) return;
-      subtask.tasks.forEach((task, j) => {
-        const li =
-          UL.querySelector(`#task-${j + 1}`) ??
-          (buildNextTask(UL, `task-${j + 1}`) as HTMLElement);
+        if (!UL) return;
+        subtask.tasks.forEach((task, j) => {
+          const li =
+            UL.querySelector(`#task-${j + 1}`) ??
+            (buildNextTask(UL, `task-${j + 1}`) as HTMLElement);
 
-        const textarea = li?.querySelector("textarea") as HTMLTextAreaElement;
-        if (textarea) textarea.value = task.detail;
+          const textarea = li?.querySelector("textarea") as HTMLTextAreaElement;
+          if (textarea) textarea.value = task.detail;
+        });
       });
-    });
+    }
+    buildNextSubtask(
+      subtaskParent,
+      "task-1",
+      `subTask-${project.subtasks.length + 1}`,
+      `article-${project.subtasks.length + 1}`,
+    );
   });
 }
 
