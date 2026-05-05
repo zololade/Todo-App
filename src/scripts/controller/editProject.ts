@@ -56,37 +56,31 @@ function handleEditBtn(_match: Element, _e: PointerEvent) {
 
     title.value = TITLE;
     para.value = OVERVIEW;
+    let article;
 
     project.subtasks.forEach((subtask, i) => {
-      let article = detailPanel.querySelector(`#article-${i + 1}`);
-
-      if (!article) {
-        buildNextSubtask(
+      article =
+        detailPanel.querySelector(`#article-${i + 1}`) ??
+        (buildNextSubtask(
           subtaskParent,
           "task-1",
           `subTask-${i + 1}`,
           `article-${i + 1}`,
-        );
-        article = detailPanel.querySelector(`#article-${i + 1}`);
-      }
+        ) as HTMLElement);
 
       if (!article) return;
-
       const heading = article.querySelector(
         ".mockH3",
       ) as HTMLInputElement | null;
       if (heading) heading.value = subtask.title;
 
       const UL = article.querySelector("ul");
+
       if (!UL) return;
-
       subtask.tasks.forEach((task, j) => {
-        let li = UL.querySelector(`#task-${j + 1}`);
-
-        if (!li) {
-          buildNextTask(UL, `task-${j + 1}`);
-          li = UL.querySelector(`#task-${j + 1}`);
-        }
+        const li =
+          UL.querySelector(`#task-${j + 1}`) ??
+          (buildNextTask(UL, `task-${j + 1}`) as HTMLElement);
 
         const textarea = li?.querySelector("textarea") as HTMLTextAreaElement;
         if (textarea) textarea.value = task.detail;

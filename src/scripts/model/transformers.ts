@@ -211,71 +211,70 @@ function buildNextSubtask(
   subTaskId: string,
   articleId: string,
 ) {
-  host.appendChild(
-    Page.build([
-      {
-        tag: "article",
+  const el = Page.build({
+    tag: "article",
 
-        id: articleId,
+    id: articleId,
+    content: [
+      {
+        tag: "input",
+
+        placeholder: "Subtask field heading...",
+        class: "mockH3",
+        id: subTaskId,
+      },
+      {
+        tag: "ul",
+
         content: [
           {
-            tag: "input",
+            tag: "li",
 
-            placeholder: "Subtask field heading...",
-            class: "mockH3",
-            id: subTaskId,
-          },
-          {
-            tag: "ul",
-
+            id: taskId,
             content: [
               {
-                tag: "li",
+                tag: "div",
 
-                id: taskId,
-                content: [
-                  {
-                    tag: "div",
-
-                    class: "markIcon",
-                    content: ".",
-                  },
-                  {
-                    tag: "textarea",
-                    rows: "1",
-                    placeholder: "Task field details of current subtask... ",
-                    class: "mockP",
-                  },
-                ],
+                class: "markIcon",
+                content: ".",
+              },
+              {
+                tag: "textarea",
+                rows: "1",
+                placeholder: "Task field details of current subtask... ",
+                class: "mockP",
               },
             ],
           },
         ],
       },
-    ]),
-  );
+    ],
+  });
+  host.appendChild(el);
+  return el;
 }
 
 function buildNextTask(host: HTMLElement, taskId: string) {
-  host.appendChild(
-    Page.build({
-      tag: "li",
-      id: taskId,
-      content: [
-        {
-          tag: "div",
-          class: "markIcon",
-          content: ".",
-        },
-        {
-          tag: "textarea",
-          rows: "1",
-          placeholder: "Task field details of current subtask... ",
-          class: "mockP",
-        },
-      ],
-    }),
-  );
+  const el = Page.build({
+    tag: "li",
+    id: taskId,
+    content: [
+      {
+        tag: "div",
+        class: "markIcon",
+        content: ".",
+      },
+      {
+        tag: "textarea",
+        rows: "1",
+        placeholder: "Task field details of current subtask... ",
+        class: "mockP",
+      },
+    ],
+  });
+
+  host.appendChild(el);
+  return el;
 }
 
 export {
