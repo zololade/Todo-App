@@ -1,8 +1,16 @@
 import { navStateSetter } from "../model/projectDetailNav";
-import { addProjectFormBuilder } from "../model/transformers";
+import {
+  addProjectFormBuilder,
+  buildNextSubtask,
+  buildNextTask,
+} from "../model/transformers";
 import { getProject } from "../store/store";
 import { mainContainer, renderElement } from "../view/renderUtilities";
-import { subTaskMap, taskMap } from "./addProjectController";
+import {
+  // extractNumber,
+  subTaskMap,
+  taskMap,
+} from "./addProjectController";
 import { getActiveProjectId } from "./controllersHelperFunctions/handleSelectProject";
 
 interface SubTask {
@@ -42,11 +50,51 @@ function handleEditBtn(_match: Element, _e: PointerEvent) {
     const para = mainContainer?.querySelector(
       "#inputPara",
     ) as HTMLInputElement | null;
+    const subtaskParent = detailPanel.querySelector(".subTask") as HTMLElement;
 
     if (!title || !para) return;
 
     title.value = TITLE;
     para.value = OVERVIEW;
+
+    project.subtasks.forEach((subtask, i) => {
+      // ensure subtask exists in UI
+      let article = detailPanel.querySelector(`#article-${i + 1}`);
+
+      if (!article) {
+        buildNextSubtask(
+          subtaskParent,
+          "task-1",
+          `subTask-${i + 1}`,
+          `article-${i + 1}`,
+        );
+
+        article = detailPanel.querySelector(`#article-${i + 1}`);
+      }
+      let heading: HTMLInputElement | null;
+      if (article) {
+        heading = article.querySelector(".mockH3");
+        if (heading) heading.value = subtask.title;
+      }
+
+      if (article) {
+        const UL = article.querySelector("ul");
+        if (UL)
+          subtask.tasks.forEach((task, j) => {
+            let li = UL.querySelector(`#task-${j + 1}`);
+
+            if (!li) {
+              buildNextTask(UL, `task-${j + 1}`);
+              li = UL.querySelector(`#task-${j + 1}`);
+            }
+
+            const textarea = li?.querySelector(
+              "textarea",
+            ) as HTMLTextAreaElement;
+            if (textarea) textarea.value = task.detail;
+          });
+      }
+    });
   });
 }
 
