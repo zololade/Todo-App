@@ -82,7 +82,7 @@ declare function addProjectFormBuilder(): ({
     id?: never;
     rows?: never;
 })[];
-declare function buildNextSubtask(host: HTMLElement, taskId: string, subTaskId: string, articleId: string): void;
-declare function buildNextTask(host: HTMLElement, taskId: string): void;
+declare function buildNextSubtask(host: HTMLElement, taskId: string, subTaskId: string, articleId: string): HTMLElement | DocumentFragment | SVGSVGElement | SVGPathElement | Text;
+declare function buildNextTask(host: HTMLElement, taskId: string): HTMLElement | DocumentFragment | SVGSVGElement | SVGPathElement | Text;
 export { buildNextSubtask, buildNextTask, projectTransformer, projectLI, projectListGetter, addProjectFormBuilder, };
 //# sourceMappingURL=transformers.d.ts.map
