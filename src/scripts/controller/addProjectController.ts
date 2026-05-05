@@ -10,6 +10,7 @@ import { mainContainer, renderElement } from "../view/renderUtilities";
 import { addProject, type InputData } from "../store/store";
 import findAndViewProject, {
   getActiveProjectId,
+  setActiveProjectId,
 } from "./controllersHelperFunctions/handleSelectProject";
 // import Page from "../view/Page";
 
@@ -22,6 +23,7 @@ export function handleAddProject(_match: Element, _e: PointerEvent) {
     document.querySelector("#backBtn")?.removeAttribute("disabled");
   }
   navStateSetter("editing");
+  setActiveProjectId(null);
   const detailPanel = document.getElementById("projectInfo");
   if (detailPanel) {
     const detailData = addProjectFormBuilder();
@@ -81,6 +83,7 @@ export function handleSubTaskMockPInput(match: HTMLElement, e: Event) {
 }
 
 export function handleSaveBtn(_match: Element, _e: Event) {
+  const editingId = getActiveProjectId();
   const projectTitleHost = document.querySelector(
     ".mockH2",
   ) as HTMLInputElement;
@@ -152,7 +155,12 @@ export function handleSaveBtn(_match: Element, _e: Event) {
     subTaskMap.clear();
   }
 
-  findAndViewProject(addProject(transformUserInput), renderNext);
+  if (editingId) {
+    // updateProject(editingId, transformUserInput);
+    findAndViewProject(editingId, renderNext);
+  } else {
+    findAndViewProject(addProject(transformUserInput), renderNext);
+  }
 }
 
 //################
