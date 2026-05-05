@@ -58,7 +58,6 @@ function handleEditBtn(_match: Element, _e: PointerEvent) {
     para.value = OVERVIEW;
 
     project.subtasks.forEach((subtask, i) => {
-      // ensure subtask exists in UI
       let article = detailPanel.querySelector(`#article-${i + 1}`);
 
       if (!article) {
@@ -68,32 +67,30 @@ function handleEditBtn(_match: Element, _e: PointerEvent) {
           `subTask-${i + 1}`,
           `article-${i + 1}`,
         );
-
         article = detailPanel.querySelector(`#article-${i + 1}`);
       }
-      let heading: HTMLInputElement | null;
-      if (article) {
-        heading = article.querySelector(".mockH3");
-        if (heading) heading.value = subtask.title;
-      }
 
-      if (article) {
-        const UL = article.querySelector("ul");
-        if (UL)
-          subtask.tasks.forEach((task, j) => {
-            let li = UL.querySelector(`#task-${j + 1}`);
+      if (!article) return;
 
-            if (!li) {
-              buildNextTask(UL, `task-${j + 1}`);
-              li = UL.querySelector(`#task-${j + 1}`);
-            }
+      const heading = article.querySelector(
+        ".mockH3",
+      ) as HTMLInputElement | null;
+      if (heading) heading.value = subtask.title;
 
-            const textarea = li?.querySelector(
-              "textarea",
-            ) as HTMLTextAreaElement;
-            if (textarea) textarea.value = task.detail;
-          });
-      }
+      const UL = article.querySelector("ul");
+      if (!UL) return;
+
+      subtask.tasks.forEach((task, j) => {
+        let li = UL.querySelector(`#task-${j + 1}`);
+
+        if (!li) {
+          buildNextTask(UL, `task-${j + 1}`);
+          li = UL.querySelector(`#task-${j + 1}`);
+        }
+
+        const textarea = li?.querySelector("textarea") as HTMLTextAreaElement;
+        if (textarea) textarea.value = task.detail;
+      });
     });
   });
 }
