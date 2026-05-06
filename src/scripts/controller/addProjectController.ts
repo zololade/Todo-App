@@ -7,7 +7,7 @@ import {
   getProjectList,
 } from "../model/transformers";
 import { mainContainer, renderElement } from "../view/renderUtilities";
-import { addProject, type InputData } from "../store/store";
+import { addProject, updateProject, type InputData } from "../store/store";
 import findAndViewProject, {
   getActiveProjectId,
   setActiveProjectId,
@@ -156,7 +156,7 @@ export function handleSaveBtn(_match: Element, _e: Event) {
   }
 
   if (editingId) {
-    // updateProject(editingId, transformUserInput);
+    updateProject(editingId, transformUserInput);
     findAndViewProject(editingId, renderNext);
   } else {
     findAndViewProject(addProject(transformUserInput), renderNext);

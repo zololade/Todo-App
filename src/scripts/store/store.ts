@@ -174,6 +174,14 @@ export function addProject(newProjectData: InputData) {
   return projId;
 }
 
+/*
+=======================
+===  update project ===
+=======================
+*/
+
+export function updateProject(id: string, modifiedData: InputData) {}
+
 //utility
 function toggleFlag(
   currentFlags: null | string[],
