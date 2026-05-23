@@ -180,7 +180,14 @@ export function addProject(newProjectData: InputData) {
 =======================
 */
 
-export function updateProject(id: string, modifiedData: InputData) {}
+// export function updateProject(id: string, modifiedData: InputData) {
+/*
+ Find the existing project by ID
+ Keep its id, createdAt, flags unchanged
+ Rebuild subtasks from InputData — but here's the problem: new InputData subtasks have no IDs,
+ and existing tasks have completion flags you don't want to lose
+ */
+// }
 
 //utility
 function toggleFlag(

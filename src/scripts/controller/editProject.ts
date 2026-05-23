@@ -22,7 +22,7 @@ interface SubTask {
     flags: string[] | null;
   }[];
 }
-
+const realIdMap: Map<string, string> = new Map();
 /*eslint-disable @typescript-eslint/no-unused-vars*/
 function handleEditBtn(_match: Element, _e: PointerEvent) {
   taskMap.clear();
@@ -57,6 +57,8 @@ function handleEditBtn(_match: Element, _e: PointerEvent) {
     title.value = TITLE;
     para.value = OVERVIEW;
     let article;
+
+    realIdMap.forEach(console.log);
 
     if (project.subtasks.length > 0) {
       project.subtasks.forEach((subtask, i) => {
@@ -100,8 +102,10 @@ function handleEditBtn(_match: Element, _e: PointerEvent) {
 /*eslint-disable @typescript-eslint/no-unused-vars*/
 function populateMap(element: SubTask, index: number, _a: SubTask[]) {
   subTaskMap.set(`subTask-${index + 1}`, element.title);
+  realIdMap.set(`subTask-${index + 1}`, element.id);
   element.tasks.forEach((e, i) => {
     taskMap.set(`article-${index + 1} task-${i + 1}`, e.detail);
+    realIdMap.set(`article-${index + 1} task-${i + 1}`, e.id);
   });
 }
 
